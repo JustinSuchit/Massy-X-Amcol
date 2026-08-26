@@ -12,11 +12,9 @@
 </head>
 <body>
   <header>
-    <div class="bar">
-      <a class="brand" href="#overview" data-goto="overview" aria-label="AMCOL partnership portal home">
-        <img src="assets/catalog/amcol-logo.png" alt="AMCOL - Americas Marketing Company Limited" class="amcol-logo">
-        <span class="brand-divider"></span>
-        <img src="assets/catalog/massy-wood-logo.png" alt="Massy Wood" class="massy-logo">
+    <div class="bar header-with-collaboration">
+      <a class="header-collaboration" href="#overview" data-goto="overview" aria-label="AMCOL and Massy collaboration home">
+        <img src="assets/collaboration/amcol-x-massy-transparent.png" alt="AMCOL in collaboration with Massy">
       </a>
       <nav id="nav" aria-label="Main navigation">
         <button class="navlink active" data-view="overview">Overview</button>
@@ -24,11 +22,12 @@
         <button class="navlink" data-view="brands">Brands</button>
         <button class="navlink" data-view="services">Services</button>
         <button class="navlink" data-view="fit">Operational fit</button>
+        <button class="navlink" data-view="why-now">Why now</button>
         <button class="navlink" data-view="partnership">Partnership</button>
         <button class="navlink" data-view="roadmap">Roadmap</button>
       </nav>
       <span class="barspacer"></span>
-      <span class="status"><i></i>Partnership proposal</span>
+      <button class="status status-button" data-goto="roadmap" data-scroll-target="contact"><i></i>Partnership proposal <b>&rarr;</b></button>
     </div>
   </header>
 
@@ -36,7 +35,7 @@
     <section class="view active" id="v-overview">
       <div class="hero">
         <div class="hero-copy">
-          <div class="eyebrow">Massy Wood &times; AMCOL <span>Industrial partnership</span></div>
+          <div class="eyebrow"><span class="s-index">S.01</span>Massy Wood &times; AMCOL <span>Industrial partnership</span></div>
           <h1>More work-fronts.<br><em>One industrial partner.</em></h1>
           <p>AMCOL combines a deep industrial catalogue with practical field services so Massy Wood can source the products, support and response capacity its crews need through every scope.</p>
           <div class="hero-actions">
@@ -48,9 +47,9 @@
         <div class="hero-visual" aria-label="AMCOL industrial product portfolio">
           <div class="orbit orbit-one"></div><div class="orbit orbit-two"></div>
           <div class="visual-label">From catalogue to work-front</div>
-          <figure class="float-card valve"><img src="assets/catalog/cutouts/ball-valve-premium.png" alt="AMCOL stainless steel ball valve"><figcaption>Flow control</figcaption></figure>
-          <figure class="float-card clamp"><img src="assets/catalog/cutouts/pipe-clamp.png" alt="AMCOL pipe repair clamp"><figcaption>Asset integrity</figcaption></figure>
-          <figure class="float-card ppe"><img src="assets/catalog/cutouts/fr-coveralls-premium.png" alt="AMCOL flame resistant coveralls"><figcaption>Workforce safety</figcaption></figure>
+          <figure class="float-card valve"><img src="assets/optimized/hero-ball-valve.webp" fetchpriority="high" decoding="async" alt="AMCOL stainless steel ball valve"><figcaption>Flow control</figcaption></figure>
+          <figure class="float-card clamp"><img src="assets/optimized/hero-pipe-clamp.webp" fetchpriority="high" decoding="async" alt="AMCOL pipe repair clamp"><figcaption>Asset integrity</figcaption></figure>
+          <figure class="float-card ppe"><img src="assets/optimized/hero-fr-coveralls.webp" fetchpriority="high" decoding="async" alt="AMCOL flame resistant coveralls"><figcaption>Workforce safety</figcaption></figure>
           <div class="catalog-badge"><strong>Industrial<br>Catalog</strong><span>2026</span></div>
           <div class="visual-floor"></div>
         </div>
@@ -64,7 +63,7 @@
       </div>
 
       <div class="section-intro split-intro">
-        <div><div class="eyebrow">The AMCOL advantage</div><h2>Supply that understands the job.</h2></div>
+        <div><div class="eyebrow"><span class="s-index">S.01</span>The AMCOL advantage</div><h2>Supply that understands the job.</h2></div>
         <p>For Massy Wood, the value is not a longer vendor list. It is an integrated relationship that connects certified products, field-ready stock and industrial service capacity around the work already underway.</p>
       </div>
       <div class="benefit-grid">
@@ -72,29 +71,37 @@
         <article class="benefit"><span class="benefit-no">02</span><h3>Built for field conditions</h3><p>SS316 process products, certified PPE and rapid pipe-repair systems selected for demanding industrial and energy environments.</p></article>
         <article class="benefit"><span class="benefit-no">03</span><h3>Support beyond supply</h3><p>AMCOL&apos;s catalogue extends into rentals, fabrication, coatings, inspection and specialised testing support when a project needs more.</p></article>
       </div>
+      <div class="photo-band" style="background-image:url('assets/optimized/band-refinery-night.webp')">
+        <div class="photo-band-inner">
+          <span class="label">On the ground, around the clock</span>
+          <h3>Built for the work already underway.</h3>
+          <p>From process plant to port, AMCOL keeps critical products and response capacity close to where Massy Wood crews are operating.</p>
+          <div class="photo-band-stat"><div><b>24</b><span>Partner brands</span></div><div><b>8</b><span>Service lines</span></div><div><b>T&amp;T</b><span>Local response</span></div></div>
+        </div>
+      </div>
     </section>
 
     <section class="view" id="v-products">
       <div class="section-intro">
-        <div class="eyebrow">Catalogue product portfolio</div>
+        <div class="eyebrow"><span class="s-index">S.02</span>Catalogue product portfolio</div>
         <h2>Critical products for the work Massy Wood does.</h2>
         <p>Click any product family to see why it belongs in a Massy Wood work-front. Product imagery is drawn from the AMCOL Industrial Catalog 2026.</p>
       </div>
       <div class="product-grid">
         <button class="product-card featured" data-product="valves" data-goto="fit">
-          <span class="product-number">01</span><img src="assets/catalog/cutouts/ball-valve-premium.png" alt="Stainless steel ball valve"><div><span class="label">Flow control</span><h3>Valves &amp; instrumentation</h3><p>SS316 ball, check and tubing valves for process and instrument service.</p><span class="card-link">Explore fit &rarr;</span></div>
+          <span class="product-number">01</span><img src="assets/catalog/cutouts/ball-valve-premium.png" loading="lazy" decoding="async" data-preload-view="products" alt="Stainless steel ball valve"><div><span class="label">Flow control</span><h3>Valves &amp; instrumentation</h3><p>SS316 ball, check and tubing valves for process and instrument service.</p><span class="card-link">Explore fit &rarr;</span></div>
         </button>
         <button class="product-card" data-product="fittings" data-goto="fit">
-          <span class="product-number">02</span><img src="assets/catalog/cutouts/tube-fittings-premium.png" alt="Stainless steel tube fittings"><div><span class="label">Connection systems</span><h3>Tube &amp; tubing fittings</h3><p>Double-ferrule fittings and SS316 tubing for hook-up and commissioning.</p><span class="card-link">Explore fit &rarr;</span></div>
+          <span class="product-number">02</span><img src="assets/catalog/cutouts/tube-fittings-premium.png" loading="lazy" decoding="async" data-preload-view="products" alt="Stainless steel tube fittings"><div><span class="label">Connection systems</span><h3>Tube &amp; tubing fittings</h3><p>Double-ferrule fittings and SS316 tubing for hook-up and commissioning.</p><span class="card-link">Explore fit &rarr;</span></div>
         </button>
         <button class="product-card" data-product="ppe" data-goto="fit">
-          <span class="product-number">03</span><img src="assets/catalog/cutouts/fr-coveralls-premium.png" alt="Flame resistant coveralls"><div><span class="label">HSE ready</span><h3>Industrial safety &amp; PPE</h3><p>Certified FR wear, gloves, hearing protection and disposable protection.</p><span class="card-link">Explore fit &rarr;</span></div>
+          <span class="product-number">03</span><img src="assets/catalog/cutouts/fr-coveralls-premium.png" loading="lazy" decoding="async" data-preload-view="products" alt="Flame resistant coveralls"><div><span class="label">HSE ready</span><h3>Industrial safety &amp; PPE</h3><p>Certified FR wear, gloves, hearing protection and disposable protection.</p><span class="card-link">Explore fit &rarr;</span></div>
         </button>
         <button class="product-card" data-product="repair" data-goto="fit">
-          <span class="product-number">04</span><img src="assets/catalog/cutouts/sealball-kit-premium.png" alt="SealBall pipe sealing kit"><div><span class="label">Asset integrity</span><h3>Pipe repair &amp; sealing</h3><p>SealBall kits and stainless steel clamps for fast leak and corrosion response.</p><span class="card-link">Explore fit &rarr;</span></div>
+          <span class="product-number">04</span><img src="assets/catalog/cutouts/sealball-kit-premium.png" loading="lazy" decoding="async" data-preload-view="products" alt="SealBall pipe sealing kit"><div><span class="label">Asset integrity</span><h3>Pipe repair &amp; sealing</h3><p>SealBall kits and stainless steel clamps for fast leak and corrosion response.</p><span class="card-link">Explore fit &rarr;</span></div>
         </button>
         <button class="product-card" data-product="tools" data-goto="fit">
-          <span class="product-number">05</span><img src="assets/catalog/cutouts/electrical-tools.png" alt="Electrician tool belt"><div><span class="label">Specialist crews</span><h3>Electrical &amp; lineman tools</h3><p>Chicago grips, insulated tools, tool belts and lifting accessories.</p><span class="card-link">Explore fit &rarr;</span></div>
+          <span class="product-number">05</span><img src="assets/catalog/cutouts/electrical-tools.png" loading="lazy" decoding="async" data-preload-view="products" alt="Electrician tool belt"><div><span class="label">Specialist crews</span><h3>Electrical &amp; lineman tools</h3><p>Chicago grips, insulated tools, tool belts and lifting accessories.</p><span class="card-link">Explore fit &rarr;</span></div>
         </button>
       </div>
       <div class="catalog-callout"><img src="assets/catalog/amcol-logo.png" alt="AMCOL logo"><div><span class="label">Catalogue-led sourcing</span><h3>Specify with confidence.</h3><p>AMCOL can align the item, standard, size and certification package to each Massy Wood work pack - before the crew mobilises.</p></div><button class="text-btn" data-goto="partnership">Plan a supply program &rarr;</button></div>
@@ -102,37 +109,37 @@
 
     <section class="view" id="v-brands">
       <div class="section-intro split-intro">
-        <div><div class="eyebrow">Trusted industrial supply brands</div><h2>Recognised names. Work-ready solutions.</h2></div>
+        <div><div class="eyebrow"><span class="s-index">S.03</span>Trusted industrial supply brands</div><h2>Recognised names. Work-ready solutions.</h2></div>
         <p>AMCOL connects Massy Wood to a focused network of industrial manufacturers - from process pumping and asset integrity to electrical, safety, tools and MRO consumables.</p>
       </div>
       <div class="brand-intro"><span>24 partner brands</span><p>Each brand is selected around a practical job: maintain flow, protect crews, repair assets, equip field teams or keep critical stock moving.</p></div>
-      <div class="brand-sheets" aria-label="AMCOL trusted partner brand logos from the 2026 company profile">
-        <figure><img src="assets/brands/trusted-partners-01.png" alt="AMCOL trusted partner logos including Dosivac, Nomad, Makita, Geko, Loctite, Technofink, Diablo, Koehler-Bright Star, Honeywell, U.S. Tape, Xylem, DENSO and Klein Tools"><figcaption>Trusted industrial supply partners</figcaption></figure>
-        <figure><img src="assets/brands/trusted-partners-02.png" alt="AMCOL trusted partner logos including Speakman, Simple Green, Milwaukee, CLR PRO, CHANCE, Buffalo, Kimberly-Clark, CRC, WD-40, Hubbell and BAND-IT"><figcaption>Trusted industrial supply partners - continued</figcaption></figure>
+      <div class="logo-marquee" aria-label="AMCOL trusted partner brand logos">
+        <div class="logo-track"><figure class="logo-tile"><img src="assets/brands/logos/dosivac.webp" loading="lazy" decoding="async" data-preload-view="brands" alt="Dosivac"></figure><figure class="logo-tile"><img src="assets/brands/logos/nomad.webp" loading="lazy" decoding="async" data-preload-view="brands" alt="Nomad"></figure><figure class="logo-tile"><img src="assets/brands/logos/makita.webp" loading="lazy" decoding="async" data-preload-view="brands" alt="Makita"></figure><figure class="logo-tile"><img src="assets/brands/logos/geko.webp" loading="lazy" decoding="async" data-preload-view="brands" alt="Geko Pipe Clamps"></figure><figure class="logo-tile"><img src="assets/brands/logos/loctite.webp" loading="lazy" decoding="async" data-preload-view="brands" alt="Loctite"></figure><figure class="logo-tile"><img src="assets/brands/logos/technofink.webp" loading="lazy" decoding="async" data-preload-view="brands" alt="Technofink"></figure><figure class="logo-tile"><img src="assets/brands/logos/diablo.webp" loading="lazy" decoding="async" data-preload-view="brands" alt="Diablo"></figure><figure class="logo-tile"><img src="assets/brands/logos/koehler-bright-star.webp" loading="lazy" decoding="async" data-preload-view="brands" alt="Koehler Bright Star"></figure><figure class="logo-tile"><img src="assets/brands/logos/honeywell.webp" loading="lazy" decoding="async" data-preload-view="brands" alt="Honeywell"></figure><figure class="logo-tile"><img src="assets/brands/logos/us-tape.webp" loading="lazy" decoding="async" data-preload-view="brands" alt="U.S. Tape"></figure><figure class="logo-tile"><img src="assets/brands/logos/xylem.webp" loading="lazy" decoding="async" data-preload-view="brands" alt="Xylem"></figure><figure class="logo-tile"><img src="assets/brands/logos/denso.webp" loading="lazy" decoding="async" data-preload-view="brands" alt="DENSO"></figure><figure class="logo-tile"><img src="assets/brands/logos/klein-tools.webp" loading="lazy" decoding="async" data-preload-view="brands" alt="Klein Tools"></figure><figure class="logo-tile"><img src="assets/brands/logos/speakman.webp" loading="lazy" decoding="async" data-preload-view="brands" alt="Speakman"></figure><figure class="logo-tile"><img src="assets/brands/logos/simple-green.webp" loading="lazy" decoding="async" data-preload-view="brands" alt="Simple Green"></figure><figure class="logo-tile"><img src="assets/brands/logos/milwaukee.webp" loading="lazy" decoding="async" data-preload-view="brands" alt="Milwaukee"></figure><figure class="logo-tile"><img src="assets/brands/logos/clr-pro.webp" loading="lazy" decoding="async" data-preload-view="brands" alt="CLR PRO"></figure><figure class="logo-tile"><img src="assets/brands/logos/chance.webp" loading="lazy" decoding="async" data-preload-view="brands" alt="CHANCE"></figure><figure class="logo-tile"><img src="assets/brands/logos/buffalo.webp" loading="lazy" decoding="async" data-preload-view="brands" alt="Buffalo Industries"></figure><figure class="logo-tile"><img src="assets/brands/logos/kimberly-clark.webp" loading="lazy" decoding="async" data-preload-view="brands" alt="Kimberly-Clark Professional"></figure><figure class="logo-tile"><img src="assets/brands/logos/crc.webp" loading="lazy" decoding="async" data-preload-view="brands" alt="CRC"></figure><figure class="logo-tile"><img src="assets/brands/logos/wd-40.webp" loading="lazy" decoding="async" data-preload-view="brands" alt="WD-40"></figure><figure class="logo-tile"><img src="assets/brands/logos/hubbell.webp" loading="lazy" decoding="async" data-preload-view="brands" alt="Hubbell"></figure><figure class="logo-tile"><img src="assets/brands/logos/band-it.webp" loading="lazy" decoding="async" data-preload-view="brands" alt="BAND-IT"></figure>
+      <figure class="logo-tile"><img src="assets/brands/logos/dosivac.webp" loading="lazy" decoding="async" data-preload-view="brands" alt="Dosivac"></figure><figure class="logo-tile"><img src="assets/brands/logos/nomad.webp" loading="lazy" decoding="async" data-preload-view="brands" alt="Nomad"></figure><figure class="logo-tile"><img src="assets/brands/logos/makita.webp" loading="lazy" decoding="async" data-preload-view="brands" alt="Makita"></figure><figure class="logo-tile"><img src="assets/brands/logos/geko.webp" loading="lazy" decoding="async" data-preload-view="brands" alt="Geko Pipe Clamps"></figure><figure class="logo-tile"><img src="assets/brands/logos/loctite.webp" loading="lazy" decoding="async" data-preload-view="brands" alt="Loctite"></figure><figure class="logo-tile"><img src="assets/brands/logos/technofink.webp" loading="lazy" decoding="async" data-preload-view="brands" alt="Technofink"></figure><figure class="logo-tile"><img src="assets/brands/logos/diablo.webp" loading="lazy" decoding="async" data-preload-view="brands" alt="Diablo"></figure><figure class="logo-tile"><img src="assets/brands/logos/koehler-bright-star.webp" loading="lazy" decoding="async" data-preload-view="brands" alt="Koehler Bright Star"></figure><figure class="logo-tile"><img src="assets/brands/logos/honeywell.webp" loading="lazy" decoding="async" data-preload-view="brands" alt="Honeywell"></figure><figure class="logo-tile"><img src="assets/brands/logos/us-tape.webp" loading="lazy" decoding="async" data-preload-view="brands" alt="U.S. Tape"></figure><figure class="logo-tile"><img src="assets/brands/logos/xylem.webp" loading="lazy" decoding="async" data-preload-view="brands" alt="Xylem"></figure><figure class="logo-tile"><img src="assets/brands/logos/denso.webp" loading="lazy" decoding="async" data-preload-view="brands" alt="DENSO"></figure><figure class="logo-tile"><img src="assets/brands/logos/klein-tools.webp" loading="lazy" decoding="async" data-preload-view="brands" alt="Klein Tools"></figure><figure class="logo-tile"><img src="assets/brands/logos/speakman.webp" loading="lazy" decoding="async" data-preload-view="brands" alt="Speakman"></figure><figure class="logo-tile"><img src="assets/brands/logos/simple-green.webp" loading="lazy" decoding="async" data-preload-view="brands" alt="Simple Green"></figure><figure class="logo-tile"><img src="assets/brands/logos/milwaukee.webp" loading="lazy" decoding="async" data-preload-view="brands" alt="Milwaukee"></figure><figure class="logo-tile"><img src="assets/brands/logos/clr-pro.webp" loading="lazy" decoding="async" data-preload-view="brands" alt="CLR PRO"></figure><figure class="logo-tile"><img src="assets/brands/logos/chance.webp" loading="lazy" decoding="async" data-preload-view="brands" alt="CHANCE"></figure><figure class="logo-tile"><img src="assets/brands/logos/buffalo.webp" loading="lazy" decoding="async" data-preload-view="brands" alt="Buffalo Industries"></figure><figure class="logo-tile"><img src="assets/brands/logos/kimberly-clark.webp" loading="lazy" decoding="async" data-preload-view="brands" alt="Kimberly-Clark Professional"></figure><figure class="logo-tile"><img src="assets/brands/logos/crc.webp" loading="lazy" decoding="async" data-preload-view="brands" alt="CRC"></figure><figure class="logo-tile"><img src="assets/brands/logos/wd-40.webp" loading="lazy" decoding="async" data-preload-view="brands" alt="WD-40"></figure><figure class="logo-tile"><img src="assets/brands/logos/hubbell.webp" loading="lazy" decoding="async" data-preload-view="brands" alt="Hubbell"></figure><figure class="logo-tile"><img src="assets/brands/logos/band-it.webp" loading="lazy" decoding="async" data-preload-view="brands" alt="BAND-IT"></figure>
       </div>
-      <div class="brand-grid">
-        <article class="brand-card"><span class="label">Process &amp; flow</span><h3>Dosivac, Nomad &amp; Xylem</h3><p>Dosivac dosing and vacuum pumps, Nomad operated double-diaphragm pumps and interchangeable aftermarket parts, plus Xylem wastewater, treatment and dewatering equipment.</p></article>
-        <article class="brand-card"><span class="label">Integrity &amp; repair</span><h3>Geko, Technofink, Loctite &amp; BAND-IT</h3><p>Band pipe clamps; metallic and ceramic corrosion protection, water-activated fibreglass tape bandages and SealBall kits; sealing, retaining and repair compounds; stainless-steel band clamps.</p></article>
-        <article class="brand-card"><span class="label">Tools &amp; site work</span><h3>Makita, Milwaukee, Diablo &amp; Klein Tools</h3><p>Construction and outdoor tools; heavy-duty cordless, corded and hand tools with PACKOUT storage; blades, sanding discs and drill bits; insulated test and measurement tools, PPE and gloves.</p></article>
-        <article class="brand-card"><span class="label">Electrical &amp; lighting</span><h3>Honeywell, Hubbell, CHANCE &amp; Koehler-Bright Star</h3><p>Industrial electrical safety gear; wiring devices, switches, connectors, anchors, arresters and insulators; utility transmission hardware and hot-line tools; intrinsically safe portable lighting.</p></article>
-        <article class="brand-card"><span class="label">MRO care &amp; cleaning</span><h3>CRC, WD-40, Simple Green, CLR PRO &amp; Kimberly-Clark</h3><p>Cleaners, degreasers, lubricants, penetrants and corrosion inhibitors; rust prevention; professional cleaning and descaling products; heavy-duty wipers and centre-feed dispensers.</p></article>
-        <article class="brand-card"><span class="label">Field safety &amp; support</span><h3>Speakman, Buffalo, U.S. Tape &amp; DENSO</h3><p>Emergency safety stations and shower units; rags, wipers, protective clothing and spill kits; precision gauging tapes; petrolatum-based compound and inert siliceous fillers.</p></article>
       </div>
       <div class="brand-footnote"><span class="label">For Massy Wood</span><p>Start with the brands that solve immediate work-front needs, then consolidate replenishment, purchasing and supplier coordination through one AMCOL relationship.</p><button class="btn primary" data-goto="partnership">Build the supply program <b>&rarr;</b></button></div>
     </section>
 
     <section class="view" id="v-services">
       <div class="section-intro split-intro">
-        <div><div class="eyebrow">Value-added services</div><h2>When the scope calls for more than a purchase order.</h2></div>
+        <div><div class="eyebrow"><span class="s-index">S.04</span>Value-added services</div><h2>When the scope calls for more than a purchase order.</h2></div>
         <p>AMCOL&apos;s 2026 catalogue positions the company as an industrial solutions partner - adding field, workshop and specialist support around its product range.</p>
       </div>
       <div class="service-stage">
-        <div class="service-image"><img src="assets/catalog/cutouts/fall-protection.png" alt="Fall protection equipment"><span>Industrial support<br>for active scopes</span></div>
-        <div class="service-list">
-          <article><span>01</span><div><h3>Equipment rentals</h3><p>Heavy equipment and equipment-rental support to help resource live projects without owning every asset.</p></div></article>
-          <article><span>02</span><div><h3>Engineering, maintenance &amp; repair</h3><p>Support for plant maintenance, repair requirements and engineering-led industrial needs.</p></div></article>
-          <article><span>03</span><div><h3>Fabrication, erection &amp; coatings</h3><p>Fabrication and erection capability, complemented by industrial coating services.</p></div></article>
-          <article><span>04</span><div><h3>Inspection &amp; specialised testing</h3><p>Inspection services, testing and specialised tools to support quality, readiness and execution.</p></div></article>
+        <div class="service-image"><img src="assets/optimized/service-fall-protection.webp" loading="lazy" decoding="async" data-preload-view="services" alt="Fall protection equipment"><span>Industrial support<br>for active scopes</span></div>
+        <div class="service-list" id="service-accordion">
+          <div class="accordion-item open"><button class="accordion-head" data-accordion><span>01</span><h3>Equipment rentals</h3><span class="accordion-toggle">+</span></button><div class="accordion-body"><p>Heavy equipment and equipment-rental support to help resource live projects without owning every asset.</p></div></div>
+          <div class="accordion-item"><button class="accordion-head" data-accordion><span>02</span><h3>Engineering, maintenance &amp; repair</h3><span class="accordion-toggle">+</span></button><div class="accordion-body"><p>Support for plant maintenance, repair requirements and engineering-led industrial needs.</p></div></div>
+          <div class="accordion-item"><button class="accordion-head" data-accordion><span>03</span><h3>Fabrication, erection &amp; coatings</h3><span class="accordion-toggle">+</span></button><div class="accordion-body"><p>Fabrication and erection capability, complemented by industrial coating services.</p></div></div>
+          <div class="accordion-item"><button class="accordion-head" data-accordion><span>04</span><h3>Inspection &amp; specialised testing</h3><span class="accordion-toggle">+</span></button><div class="accordion-body"><p>Inspection services, testing and specialised tools to support quality, readiness and execution.</p></div></div>
+        </div>
+      </div>
+      <div class="photo-band" style="background-image:url('assets/optimized/service-fabrication.webp')">
+        <div class="photo-band-inner">
+          <span class="label">Fabrication &amp; erection</span>
+          <h3>Workshop capability, on call.</h3>
+          <p>When a scope needs more than a catalogue item, AMCOL&apos;s fabrication and coating capability backs the product range.</p>
         </div>
       </div>
       <div class="service-footer"><span class="label">Massy Wood opportunity</span><p>Pair a replenishment supply agreement with on-call support for project surges, shutdowns, repairs and specialist work-fronts.</p><button class="btn primary" data-goto="partnership">Build the service model <b>&rarr;</b></button></div>
@@ -140,7 +147,7 @@
 
     <section class="view" id="v-fit">
       <div class="section-intro">
-        <div class="eyebrow">Operational fit</div><h2>Designed around Massy Wood&apos;s live work-fronts.</h2><p>The strongest partnership starts with the products and services that are used continuously - then expands as results are proven.</p>
+        <div class="eyebrow"><span class="s-index">S.05</span>Operational fit</div><h2>Designed around Massy Wood&apos;s live work-fronts.</h2><p>The strongest partnership starts with the products and services that are used continuously - then expands as results are proven.</p>
       </div>
       <div class="fit-board">
         <div class="fit-head"><span>Massy Wood scope</span><span>AMCOL response</span><span>Fit</span></div>
@@ -153,29 +160,54 @@
       <div class="focus-grid"><article><span class="label">Lead with</span><h3>Safety + pipe integrity</h3><p>High-consumption PPE and rapid-response repair solutions create a practical starting point with visible operational value.</p></article><article><span class="label">Consolidate</span><h3>Valves + fittings</h3><p>Bring process, hook-up and commissioning items into the same relationship to reduce vendor friction.</p></article><article><span class="label">Extend</span><h3>Services + projects</h3><p>Engage AMCOL&apos;s service capability when scope complexity, surge capacity or specialist support is required.</p></article></div>
     </section>
 
+    <section class="view" id="v-why-now">
+      <div class="section-intro split-intro"><div><div class="eyebrow"><span class="s-index">S.06</span>Why now</div><h2>When supply timing becomes an operating decision.</h2></div><p>For critical work-fronts, the question is not simply where an item is made. It is whether it is available before a delay turns into lost production, added logistics or a compromised turnaround.</p></div>
+      <div class="lead-time-panel reveal"><div><span class="label">The local availability case</span><b>Same-day local</b><p>versus <strong>8-14 days by sea</strong> for a typical imported replenishment cycle.</p></div><p>Local stock, approved alternatives and a first-call partner create a practical buffer between a missing part and a costly operational interruption.</p></div>
+      <div class="photo-band reveal" style="background-image:url('assets/optimized/band-offshore-rig.webp')">
+        <div class="photo-band-inner">
+          <span class="label">Offshore raises the stakes</span>
+          <h3>A $20 stockout can trigger a boat run.</h3>
+          <p>Guyana and Trinidad &amp; Tobago logistics leave little room for a missing part. Local-content readiness and regional coordination turn that exposure into a manageable operating lever.</p>
+        </div>
+      </div>
+      <div class="pressure-grid">
+        <article class="pressure-card reveal"><span>01</span><h3>Turnarounds do not wait.</h3><p>A missing item during an Atlantic LNG shutdown can cost cargoes, not hours. The supply program needs criticality mapping, substitute rules and a response path before the scope starts.</p></article>
+        <article class="pressure-card reveal"><span>02</span><h3>Offshore magnifies a stockout.</h3><p>A $20 stockout can trigger a boat run. Guyana logistics can be more demanding still, which makes local-content readiness and regional coordination an operational lever.</p></article>
+        <article class="pressure-card reveal"><span>03</span><h3>Lead time is a risk signal.</h3><p>Every imported-only line leaves crews exposed to transit, consolidation and customs variables. AMCOL helps reduce that exposure with locally supported brands and planned replenishment.</p></article>
+      </div>
+      <div class="vmi-stage reveal"><div><span class="label">Vendor-managed inventory</span><h2>Keep cash in the business - and critical stock within reach.</h2><p>VMI turns recurring MRO demand into a controlled service model: define critical items, agree min/max levels, replenish to schedule, and use consignment where it makes commercial sense.</p></div><ol><li><b>01</b><span>Set min/max by work-front, usage and criticality.</span></li><li><b>02</b><span>Stage approved fast-movers through yard, site or consignment stock.</span></li><li><b>03</b><span>Monitor, replenish and report - with fewer emergency purchases and less cash tied up in excess inventory.</span></li></ol></div>
+    </section>
+
     <section class="view" id="v-partnership">
-      <div class="section-intro split-intro"><div><div class="eyebrow">Partnership model</div><h2>Flexible enough for how Massy Wood works.</h2></div><p>Start with an immediate supply need, then shape a long-term model around stock, kitting, response time and project support.</p></div>
+      <div class="section-intro split-intro"><div><div class="eyebrow"><span class="s-index">S.07</span>Partnership model</div><h2>Flexible enough for how Massy Wood works.</h2></div><p>Start with an immediate supply need, then shape a long-term model around stock, kitting, response time and project support.</p></div>
+      <div class="photo-band" style="background-image:url('assets/optimized/band-warehouse.webp')">
+        <div class="photo-band-inner">
+          <span class="label">Yard &amp; site stock</span>
+          <h3>Fast-movers staged close to the work.</h3>
+          <p>Vendor-managed or consignment stock, racked and ready, with scheduled replenishment so crews are never waiting on a purchase order.</p>
+        </div>
+      </div>
       <div class="model-grid">
         <article class="model-card"><span>01</span><h3>Preferred supply</h3><p>A consolidated source for targeted product families, aligned to your purchasing process and HSE requirements.</p></article>
         <article class="model-card highlighted"><span>02</span><h3>Yard &amp; site stock</h3><p>Vendor-managed or consignment fast-movers staged close to the people doing the work, with scheduled replenishment and inventory monitoring.</p></article>
         <article class="model-card"><span>03</span><h3>PPE &amp; crew kitting</h3><p>Certified PPE bundles for new hires, rotations and specialist crews - ready when mobilisation calls.</p></article>
         <article class="model-card"><span>04</span><h3>Project response</h3><p>Product, rental and industrial-service support that flexes for repairs, shutdowns and fast-moving scopes.</p></article>
       </div>
-      <div class="partnership-banner"><div><img src="assets/catalog/cutouts/sealball-kit-premium.png" alt="SealBall repair kit"></div><div><span class="label">A relationship built to scale</span><h3>Start practical. Prove performance. Expand with confidence.</h3><p>Every stage can be measured around availability, responsiveness, compliance and reduced administrative effort.</p></div><button class="text-btn" data-goto="roadmap">See the pathway &rarr;</button></div>
+      <div class="partnership-banner"><div><img src="assets/optimized/sealball-kit.webp" loading="lazy" decoding="async" data-preload-view="partnership" alt="SealBall repair kit"></div><div><span class="label">A relationship built to scale</span><h3>Start practical. Prove performance. Expand with confidence.</h3><p>Every stage can be measured around availability, responsiveness, compliance and reduced administrative effort.</p></div><button class="text-btn" data-goto="roadmap">See the pathway &rarr;</button></div>
     </section>
 
     <section class="view" id="v-roadmap">
-      <div class="section-intro center"><div class="eyebrow">Activation roadmap</div><h2>A low-friction path to a stronger supply chain.</h2><p>Move from catalogue review to a partnership that is visible in the field, without disrupting current operations.</p></div>
+      <div class="section-intro"><div class="eyebrow"><span class="s-index">S.08</span>Activation roadmap</div><h2>A low-friction path to a stronger supply chain.</h2><p>Move from catalogue review to a partnership that is visible in the field, without disrupting current operations.</p></div>
       <div class="timeline">
         <article><span>01</span><h3>Map the need</h3><p>Review priority work-fronts, product standards and replenishment patterns with supply-chain and maintenance leads.</p></article>
         <article><span>02</span><h3>Qualify &amp; specify</h3><p>Complete onboarding and build a first-call list of catalogue items, documentation and substitute rules.</p></article>
         <article><span>03</span><h3>Trial the model</h3><p>Launch a focused PPE, pipe-integrity or valve-and-fitting supply program with agreed service measures.</p></article>
         <article><span>04</span><h3>Scale together</h3><p>Extend into broader product families, site stock and value-added industrial services as the relationship proves out.</p></article>
       </div>
-      <div class="closing">
-        <img src="assets/catalog/amcol-logo.png" alt="AMCOL logo">
-        <div><span class="eyebrow">Ready when the work is</span><h2>Let&apos;s build the Massy Wood &times; AMCOL supply program.</h2><p>A focused working session can turn this catalogue into the specific product, stock and service plan your teams need next.</p></div>
-        <div class="contact-block"><b>Next step</b><span>Catalogue + scope review</span><button class="btn secondary" data-goto="products">Review products</button></div>
+      <div class="closing" id="contact">
+        <img src="assets/optimized/amcol-mark.webp" alt="AMCOL logo">
+        <div><span class="eyebrow">Let&apos;s talk</span><h2>Book a 30-minute supply review.</h2><p>AMCOL Industrial Solutions Team<br><a href="mailto:americasmarketing@hotmail.com">americasmarketing@hotmail.com</a> &middot; <a href="tel:+18686208100">868 620-8100</a> / <a href="tel:+18683295200">329-5200</a></p></div>
+        <div class="contact-block"><b>One-line ask</b><span>Review priority work-fronts, critical stock and the first VMI opportunity.</span><a class="btn primary" href="mailto:americasmarketing@hotmail.com?subject=Massy%20Wood%20supply%20review">Start the conversation <b>&rarr;</b></a></div>
       </div>
     </section>
   </main>
