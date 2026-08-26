@@ -1,0 +1,13 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "rewrites": [
+    {
+      "source": "/",
+      "destination": "/AMCOL_Strategic_Portal/index.html"
+    },
+    {
+      "source": "/:path*",
+      "destination": "/AMCOL_Strategic_Portal/:path*"
+    }
+  ]
+}
