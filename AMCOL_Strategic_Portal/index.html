@@ -9,6 +9,18 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800;900&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
   <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="node_modules/lenis/dist/lenis.css">
+  <script type="importmap">
+    {
+      "imports": {
+        "animejs": "./node_modules/animejs/dist/modules/index.js",
+        "lenis": "./node_modules/lenis/dist/lenis.mjs",
+        "three": "./node_modules/three/build/three.module.js",
+        "gsap": "./node_modules/gsap/index.js",
+        "gsap/ScrollTrigger": "./node_modules/gsap/ScrollTrigger.js"
+      }
+    }
+  </script>
 </head>
 <body>
   <header>
@@ -32,7 +44,8 @@
   </header>
 
   <main>
-    <section class="view active" id="v-overview">
+    <section class="view active" id="v-overview" data-section="overview">
+      <div class="chapter-break"><span>01</span><h2>Overview</h2><i></i><small>AMCOL × Massy Wood</small></div>
       <div class="hero">
         <div class="hero-copy">
           <div class="eyebrow"><span class="s-index">S.01</span>Massy Wood &times; AMCOL <span>Industrial partnership</span></div>
@@ -45,6 +58,7 @@
           <div class="hero-note"><span class="pulse-dot"></span>Prepared for Massy Wood &middot; 2026 catalogue-led proposal</div>
         </div>
         <div class="hero-visual" aria-label="AMCOL industrial product portfolio">
+          <canvas class="hero-webgl" aria-hidden="true"></canvas>
           <div class="orbit orbit-one"></div><div class="orbit orbit-two"></div>
           <div class="visual-label">From catalogue to work-front</div>
           <figure class="float-card valve"><img src="assets/optimized/hero-ball-valve.webp" fetchpriority="high" decoding="async" alt="AMCOL stainless steel ball valve"><figcaption>Flow control</figcaption></figure>
@@ -81,47 +95,278 @@
       </div>
     </section>
 
-    <section class="view" id="v-products">
+    <section class="view" id="v-products" data-section="products">
+      <div class="chapter-break"><span>02</span><h2>Products</h2><i></i><small>Catalogue portfolio</small></div>
       <div class="section-intro">
         <div class="eyebrow"><span class="s-index">S.02</span>Catalogue product portfolio</div>
         <h2>Critical products for the work Massy Wood does.</h2>
-        <p>Click any product family to see why it belongs in a Massy Wood work-front. Product imagery is drawn from the AMCOL Industrial Catalog 2026.</p>
+        <p>Select a product family to inspect the detail that belongs in a Massy Wood work-front. Product imagery is drawn from the AMCOL Industrial Catalog 2026.</p>
       </div>
-      <div class="product-grid">
-        <button class="product-card featured" data-product="valves" data-goto="fit">
-          <span class="product-number">01</span><img src="assets/catalog/cutouts/ball-valve-premium.png" loading="lazy" decoding="async" data-preload-view="products" alt="Stainless steel ball valve"><div><span class="label">Flow control</span><h3>Valves &amp; instrumentation</h3><p>SS316 ball, check and tubing valves for process and instrument service.</p><span class="card-link">Explore fit &rarr;</span></div>
-        </button>
-        <button class="product-card" data-product="fittings" data-goto="fit">
-          <span class="product-number">02</span><img src="assets/catalog/cutouts/tube-fittings-premium.png" loading="lazy" decoding="async" data-preload-view="products" alt="Stainless steel tube fittings"><div><span class="label">Connection systems</span><h3>Tube &amp; tubing fittings</h3><p>Double-ferrule fittings and SS316 tubing for hook-up and commissioning.</p><span class="card-link">Explore fit &rarr;</span></div>
-        </button>
-        <button class="product-card" data-product="ppe" data-goto="fit">
-          <span class="product-number">03</span><img src="assets/catalog/cutouts/fr-coveralls-premium.png" loading="lazy" decoding="async" data-preload-view="products" alt="Flame resistant coveralls"><div><span class="label">HSE ready</span><h3>Industrial safety &amp; PPE</h3><p>Certified FR wear, gloves, hearing protection and disposable protection.</p><span class="card-link">Explore fit &rarr;</span></div>
-        </button>
-        <button class="product-card" data-product="repair" data-goto="fit">
-          <span class="product-number">04</span><img src="assets/catalog/cutouts/sealball-kit-premium.png" loading="lazy" decoding="async" data-preload-view="products" alt="SealBall pipe sealing kit"><div><span class="label">Asset integrity</span><h3>Pipe repair &amp; sealing</h3><p>SealBall kits and stainless steel clamps for fast leak and corrosion response.</p><span class="card-link">Explore fit &rarr;</span></div>
-        </button>
-        <button class="product-card" data-product="tools" data-goto="fit">
-          <span class="product-number">05</span><img src="assets/catalog/cutouts/electrical-tools.png" loading="lazy" decoding="async" data-preload-view="products" alt="Electrician tool belt"><div><span class="label">Specialist crews</span><h3>Electrical &amp; lineman tools</h3><p>Chicago grips, insulated tools, tool belts and lifting accessories.</p><span class="card-link">Explore fit &rarr;</span></div>
-        </button>
+
+      <div class="product-showcase" data-showcase>
+        <div class="showcase-tabs" role="tablist" aria-label="Product families">
+          <button class="showcase-tab active" role="tab" id="tab-valves" aria-selected="true" aria-controls="panel-valves" data-showcase-tab="valves"><span>01</span>Valves</button>
+          <button class="showcase-tab" role="tab" id="tab-fittings" aria-selected="false" aria-controls="panel-fittings" data-showcase-tab="fittings"><span>02</span>Fittings</button>
+          <button class="showcase-tab" role="tab" id="tab-ppe" aria-selected="false" aria-controls="panel-ppe" data-showcase-tab="ppe"><span>03</span>PPE</button>
+          <button class="showcase-tab" role="tab" id="tab-repair" aria-selected="false" aria-controls="panel-repair" data-showcase-tab="repair"><span>04</span>Repair</button>
+          <button class="showcase-tab" role="tab" id="tab-tools" aria-selected="false" aria-controls="panel-tools" data-showcase-tab="tools"><span>05</span>Tools</button>
+        </div>
+
+        <div class="showcase-stage">
+          <article class="showcase-panel active" role="tabpanel" id="panel-valves" aria-labelledby="tab-valves" data-product="valves">
+            <div class="showcase-copy">
+              <span class="label">Flow control</span>
+              <h3>Valves &amp; instrumentation</h3>
+              <p>SS316 ball, check and tubing valves for process and instrument service.</p>
+              <ul class="showcase-features">
+                <li data-feature="0"><button type="button"><b>01</b><span>SS316 ball valves for process service</span></button></li>
+                <li data-feature="1"><button type="button"><b>02</b><span>Check valves for directional control</span></button></li>
+                <li data-feature="2"><button type="button"><b>03</b><span>Tubing valves for instrument lines</span></button></li>
+                <li data-feature="3"><button type="button"><b>04</b><span>Built for process and instrument duty</span></button></li>
+              </ul>
+              <div class="showcase-actions">
+                <button class="btn secondary showcase-prev" type="button" aria-label="Previous product">←</button>
+                <button class="btn secondary showcase-next" type="button" aria-label="Next product">→</button>
+                <button class="btn primary" data-goto="fit">Explore operational fit <b>→</b></button>
+              </div>
+            </div>
+            <div class="showcase-visual">
+              <svg class="showcase-connectors" aria-hidden="true"></svg>
+              <div class="showcase-orbit-ring" aria-hidden="true"></div>
+              <div class="showcase-orbit" data-orbit>
+                <img src="assets/catalog/cutouts/ball-valve-premium.png" data-preload-view="products" alt="Stainless steel ball valve" width="640" height="640" decoding="async">
+              </div>
+              <div class="showcase-hotspots">
+                <button type="button" class="hotspot" data-hotspot="0" style="--hx:28%;--hy:34%" aria-label="SS316 ball valve body"><i></i><span>SS316 body</span></button>
+                <button type="button" class="hotspot" data-hotspot="1" style="--hx:62%;--hy:22%" aria-label="Check valve capability"><i></i><span>Check service</span></button>
+                <button type="button" class="hotspot" data-hotspot="2" style="--hx:74%;--hy:58%" aria-label="Tubing valve connection"><i></i><span>Tubing valve</span></button>
+                <button type="button" class="hotspot" data-hotspot="3" style="--hx:42%;--hy:78%" aria-label="Process and instrument duty"><i></i><span>Process duty</span></button>
+              </div>
+            </div>
+            <div class="showcase-mobile-callouts" aria-hidden="true">
+              <div data-callout="0"><b>SS316 body</b><span>Ball valves for process service</span></div>
+              <div data-callout="1"><b>Check service</b><span>Directional control in line</span></div>
+              <div data-callout="2"><b>Tubing valve</b><span>Instrument-line connections</span></div>
+              <div data-callout="3"><b>Process duty</b><span>Process and instrument service</span></div>
+            </div>
+          </article>
+
+          <article class="showcase-panel" role="tabpanel" id="panel-fittings" aria-labelledby="tab-fittings" data-product="fittings" hidden>
+            <div class="showcase-copy">
+              <span class="label">Connection systems</span>
+              <h3>Tube &amp; tubing fittings</h3>
+              <p>Double-ferrule fittings and SS316 tubing for hook-up and commissioning.</p>
+              <ul class="showcase-features">
+                <li data-feature="0"><button type="button"><b>01</b><span>Double-ferrule fitting systems</span></button></li>
+                <li data-feature="1"><button type="button"><b>02</b><span>SS316 tubing for industrial service</span></button></li>
+                <li data-feature="2"><button type="button"><b>03</b><span>Hook-up ready connection sets</span></button></li>
+                <li data-feature="3"><button type="button"><b>04</b><span>Commissioning support stock</span></button></li>
+              </ul>
+              <div class="showcase-actions">
+                <button class="btn secondary showcase-prev" type="button" aria-label="Previous product">←</button>
+                <button class="btn secondary showcase-next" type="button" aria-label="Next product">→</button>
+                <button class="btn primary" data-goto="fit">Explore operational fit <b>→</b></button>
+              </div>
+            </div>
+            <div class="showcase-visual">
+              <svg class="showcase-connectors" aria-hidden="true"></svg>
+              <div class="showcase-orbit-ring" aria-hidden="true"></div>
+              <div class="showcase-orbit" data-orbit>
+                <img src="assets/catalog/cutouts/tube-fittings-premium.png" loading="lazy" data-preload-view="products" alt="Stainless steel tube fittings" width="640" height="640" decoding="async">
+              </div>
+              <div class="showcase-hotspots">
+                <button type="button" class="hotspot" data-hotspot="0" style="--hx:30%;--hy:40%" aria-label="Double-ferrule fittings"><i></i><span>Double-ferrule</span></button>
+                <button type="button" class="hotspot" data-hotspot="1" style="--hx:68%;--hy:28%" aria-label="SS316 tubing"><i></i><span>SS316 tubing</span></button>
+                <button type="button" class="hotspot" data-hotspot="2" style="--hx:72%;--hy:62%" aria-label="Hook-up connections"><i></i><span>Hook-up</span></button>
+                <button type="button" class="hotspot" data-hotspot="3" style="--hx:38%;--hy:76%" aria-label="Commissioning stock"><i></i><span>Commissioning</span></button>
+              </div>
+            </div>
+            <div class="showcase-mobile-callouts" aria-hidden="true">
+              <div data-callout="0"><b>Double-ferrule</b><span>Fitting systems for secure joins</span></div>
+              <div data-callout="1"><b>SS316 tubing</b><span>Industrial-service tubing</span></div>
+              <div data-callout="2"><b>Hook-up</b><span>Connection sets for install</span></div>
+              <div data-callout="3"><b>Commissioning</b><span>Stock aligned to start-up</span></div>
+            </div>
+          </article>
+
+          <article class="showcase-panel" role="tabpanel" id="panel-ppe" aria-labelledby="tab-ppe" data-product="ppe" hidden>
+            <div class="showcase-copy">
+              <span class="label">HSE ready</span>
+              <h3>Industrial safety &amp; PPE</h3>
+              <p>Certified FR wear, gloves, hearing protection and disposable protection.</p>
+              <ul class="showcase-features">
+                <li data-feature="0"><button type="button"><b>01</b><span>Certified flame-resistant wear</span></button></li>
+                <li data-feature="1"><button type="button"><b>02</b><span>Industrial gloves for crew duty</span></button></li>
+                <li data-feature="2"><button type="button"><b>03</b><span>Hearing protection for live sites</span></button></li>
+                <li data-feature="3"><button type="button"><b>04</b><span>Disposable protection options</span></button></li>
+              </ul>
+              <div class="showcase-actions">
+                <button class="btn secondary showcase-prev" type="button" aria-label="Previous product">←</button>
+                <button class="btn secondary showcase-next" type="button" aria-label="Next product">→</button>
+                <button class="btn primary" data-goto="fit">Explore operational fit <b>→</b></button>
+              </div>
+            </div>
+            <div class="showcase-visual">
+              <svg class="showcase-connectors" aria-hidden="true"></svg>
+              <div class="showcase-orbit-ring" aria-hidden="true"></div>
+              <div class="showcase-orbit" data-orbit>
+                <img src="assets/catalog/cutouts/fr-coveralls-premium.png" loading="lazy" data-preload-view="products" alt="Flame resistant coveralls" width="640" height="640" decoding="async">
+              </div>
+              <div class="showcase-hotspots">
+                <button type="button" class="hotspot" data-hotspot="0" style="--hx:48%;--hy:18%" aria-label="Certified FR wear"><i></i><span>Certified FR</span></button>
+                <button type="button" class="hotspot" data-hotspot="1" style="--hx:22%;--hy:48%" aria-label="Industrial gloves"><i></i><span>Gloves</span></button>
+                <button type="button" class="hotspot" data-hotspot="2" style="--hx:78%;--hy:42%" aria-label="Hearing protection"><i></i><span>Hearing</span></button>
+                <button type="button" class="hotspot" data-hotspot="3" style="--hx:56%;--hy:82%" aria-label="Disposable protection"><i></i><span>Disposable</span></button>
+              </div>
+            </div>
+            <div class="showcase-mobile-callouts" aria-hidden="true">
+              <div data-callout="0"><b>Certified FR</b><span>Flame-resistant wear</span></div>
+              <div data-callout="1"><b>Gloves</b><span>Industrial crew duty</span></div>
+              <div data-callout="2"><b>Hearing</b><span>Protection for live sites</span></div>
+              <div data-callout="3"><b>Disposable</b><span>Single-use protection options</span></div>
+            </div>
+          </article>
+
+          <article class="showcase-panel" role="tabpanel" id="panel-repair" aria-labelledby="tab-repair" data-product="repair" hidden>
+            <div class="showcase-copy">
+              <span class="label">Asset integrity</span>
+              <h3>Pipe repair &amp; sealing</h3>
+              <p>SealBall kits and stainless steel clamps for fast leak and corrosion response.</p>
+              <ul class="showcase-features">
+                <li data-feature="0"><button type="button"><b>01</b><span>SealBall kits for rapid sealing</span></button></li>
+                <li data-feature="1"><button type="button"><b>02</b><span>Stainless steel repair clamps</span></button></li>
+                <li data-feature="2"><button type="button"><b>03</b><span>Fast leak response capability</span></button></li>
+                <li data-feature="3"><button type="button"><b>04</b><span>Corrosion response support</span></button></li>
+              </ul>
+              <div class="showcase-actions">
+                <button class="btn secondary showcase-prev" type="button" aria-label="Previous product">←</button>
+                <button class="btn secondary showcase-next" type="button" aria-label="Next product">→</button>
+                <button class="btn primary" data-goto="fit">Explore operational fit <b>→</b></button>
+              </div>
+            </div>
+            <div class="showcase-visual">
+              <svg class="showcase-connectors" aria-hidden="true"></svg>
+              <div class="showcase-orbit-ring" aria-hidden="true"></div>
+              <div class="showcase-orbit" data-orbit>
+                <img src="assets/catalog/cutouts/sealball-kit-premium.png" loading="lazy" data-preload-view="products" alt="SealBall pipe sealing kit" width="640" height="640" decoding="async">
+              </div>
+              <div class="showcase-hotspots">
+                <button type="button" class="hotspot" data-hotspot="0" style="--hx:34%;--hy:30%" aria-label="SealBall kit"><i></i><span>SealBall kit</span></button>
+                <button type="button" class="hotspot" data-hotspot="1" style="--hx:70%;--hy:26%" aria-label="Stainless steel clamps"><i></i><span>SS clamps</span></button>
+                <button type="button" class="hotspot" data-hotspot="2" style="--hx:76%;--hy:60%" aria-label="Fast leak response"><i></i><span>Leak response</span></button>
+                <button type="button" class="hotspot" data-hotspot="3" style="--hx:40%;--hy:78%" aria-label="Corrosion response"><i></i><span>Corrosion</span></button>
+              </div>
+            </div>
+            <div class="showcase-mobile-callouts" aria-hidden="true">
+              <div data-callout="0"><b>SealBall kit</b><span>Rapid sealing response</span></div>
+              <div data-callout="1"><b>SS clamps</b><span>Stainless steel repair clamps</span></div>
+              <div data-callout="2"><b>Leak response</b><span>Fast leak containment</span></div>
+              <div data-callout="3"><b>Corrosion</b><span>Integrity response support</span></div>
+            </div>
+          </article>
+
+          <article class="showcase-panel" role="tabpanel" id="panel-tools" aria-labelledby="tab-tools" data-product="tools" hidden>
+            <div class="showcase-copy">
+              <span class="label">Specialist crews</span>
+              <h3>Electrical &amp; lineman tools</h3>
+              <p>Chicago grips, insulated tools, tool belts and lifting accessories.</p>
+              <ul class="showcase-features">
+                <li data-feature="0"><button type="button"><b>01</b><span>Chicago grips for line work</span></button></li>
+                <li data-feature="1"><button type="button"><b>02</b><span>Insulated tools for electrical scopes</span></button></li>
+                <li data-feature="2"><button type="button"><b>03</b><span>Tool belts for field crews</span></button></li>
+                <li data-feature="3"><button type="button"><b>04</b><span>Lifting accessories for install work</span></button></li>
+              </ul>
+              <div class="showcase-actions">
+                <button class="btn secondary showcase-prev" type="button" aria-label="Previous product">←</button>
+                <button class="btn secondary showcase-next" type="button" aria-label="Next product">→</button>
+                <button class="btn primary" data-goto="fit">Explore operational fit <b>→</b></button>
+              </div>
+            </div>
+            <div class="showcase-visual">
+              <svg class="showcase-connectors" aria-hidden="true"></svg>
+              <div class="showcase-orbit-ring" aria-hidden="true"></div>
+              <div class="showcase-orbit" data-orbit>
+                <img src="assets/catalog/cutouts/electrical-tools.png" loading="lazy" data-preload-view="products" alt="Electrician tool belt" width="640" height="640" decoding="async">
+              </div>
+              <div class="showcase-hotspots">
+                <button type="button" class="hotspot" data-hotspot="0" style="--hx:28%;--hy:32%" aria-label="Chicago grips"><i></i><span>Chicago grips</span></button>
+                <button type="button" class="hotspot" data-hotspot="1" style="--hx:68%;--hy:24%" aria-label="Insulated tools"><i></i><span>Insulated</span></button>
+                <button type="button" class="hotspot" data-hotspot="2" style="--hx:74%;--hy:58%" aria-label="Tool belts"><i></i><span>Tool belts</span></button>
+                <button type="button" class="hotspot" data-hotspot="3" style="--hx:42%;--hy:80%" aria-label="Lifting accessories"><i></i><span>Lifting</span></button>
+              </div>
+            </div>
+            <div class="showcase-mobile-callouts" aria-hidden="true">
+              <div data-callout="0"><b>Chicago grips</b><span>Line-work holding tools</span></div>
+              <div data-callout="1"><b>Insulated</b><span>Tools for electrical scopes</span></div>
+              <div data-callout="2"><b>Tool belts</b><span>Field-crew carry systems</span></div>
+              <div data-callout="3"><b>Lifting</b><span>Accessories for install work</span></div>
+            </div>
+          </article>
+        </div>
       </div>
+
       <div class="catalog-callout"><img src="assets/catalog/amcol-logo.png" alt="AMCOL logo"><div><span class="label">Catalogue-led sourcing</span><h3>Specify with confidence.</h3><p>AMCOL can align the item, standard, size and certification package to each Massy Wood work pack - before the crew mobilises.</p></div><button class="text-btn" data-goto="partnership">Plan a supply program &rarr;</button></div>
     </section>
 
-    <section class="view" id="v-brands">
-      <div class="section-intro split-intro">
+    <section class="view" id="v-brands" data-section="brands">
+      <div class="chapter-break"><span>03</span><h2>Brands</h2><i></i><small>Industrial supply network</small></div>
+      <div class="section-intro split-intro brands-intro">
         <div><div class="eyebrow"><span class="s-index">S.03</span>Trusted industrial supply brands</div><h2>Recognised names. Work-ready solutions.</h2></div>
-        <p>AMCOL connects Massy Wood to a focused network of industrial manufacturers - from process pumping and asset integrity to electrical, safety, tools and MRO consumables.</p>
+        <p>AMCOL connects Massy Wood to a focused network of industrial manufacturers — from process pumping and asset integrity to electrical, safety, tools and MRO consumables.</p>
       </div>
-      <div class="brand-intro"><span>24 partner brands</span><p>Each brand is selected around a practical job: maintain flow, protect crews, repair assets, equip field teams or keep critical stock moving.</p></div>
-      <div class="logo-marquee" aria-label="AMCOL trusted partner brand logos">
-        <div class="logo-track"><figure class="logo-tile"><img src="assets/brands/logos/dosivac.webp" loading="lazy" decoding="async" data-preload-view="brands" alt="Dosivac"></figure><figure class="logo-tile"><img src="assets/brands/logos/nomad.webp" loading="lazy" decoding="async" data-preload-view="brands" alt="Nomad"></figure><figure class="logo-tile"><img src="assets/brands/logos/makita.webp" loading="lazy" decoding="async" data-preload-view="brands" alt="Makita"></figure><figure class="logo-tile"><img src="assets/brands/logos/geko.webp" loading="lazy" decoding="async" data-preload-view="brands" alt="Geko Pipe Clamps"></figure><figure class="logo-tile"><img src="assets/brands/logos/loctite.webp" loading="lazy" decoding="async" data-preload-view="brands" alt="Loctite"></figure><figure class="logo-tile"><img src="assets/brands/logos/technofink.webp" loading="lazy" decoding="async" data-preload-view="brands" alt="Technofink"></figure><figure class="logo-tile"><img src="assets/brands/logos/diablo.webp" loading="lazy" decoding="async" data-preload-view="brands" alt="Diablo"></figure><figure class="logo-tile"><img src="assets/brands/logos/koehler-bright-star.webp" loading="lazy" decoding="async" data-preload-view="brands" alt="Koehler Bright Star"></figure><figure class="logo-tile"><img src="assets/brands/logos/honeywell.webp" loading="lazy" decoding="async" data-preload-view="brands" alt="Honeywell"></figure><figure class="logo-tile"><img src="assets/brands/logos/us-tape.webp" loading="lazy" decoding="async" data-preload-view="brands" alt="U.S. Tape"></figure><figure class="logo-tile"><img src="assets/brands/logos/xylem.webp" loading="lazy" decoding="async" data-preload-view="brands" alt="Xylem"></figure><figure class="logo-tile"><img src="assets/brands/logos/denso.webp" loading="lazy" decoding="async" data-preload-view="brands" alt="DENSO"></figure><figure class="logo-tile"><img src="assets/brands/logos/klein-tools.webp" loading="lazy" decoding="async" data-preload-view="brands" alt="Klein Tools"></figure><figure class="logo-tile"><img src="assets/brands/logos/speakman.webp" loading="lazy" decoding="async" data-preload-view="brands" alt="Speakman"></figure><figure class="logo-tile"><img src="assets/brands/logos/simple-green.webp" loading="lazy" decoding="async" data-preload-view="brands" alt="Simple Green"></figure><figure class="logo-tile"><img src="assets/brands/logos/milwaukee.webp" loading="lazy" decoding="async" data-preload-view="brands" alt="Milwaukee"></figure><figure class="logo-tile"><img src="assets/brands/logos/clr-pro.webp" loading="lazy" decoding="async" data-preload-view="brands" alt="CLR PRO"></figure><figure class="logo-tile"><img src="assets/brands/logos/chance.webp" loading="lazy" decoding="async" data-preload-view="brands" alt="CHANCE"></figure><figure class="logo-tile"><img src="assets/brands/logos/buffalo.webp" loading="lazy" decoding="async" data-preload-view="brands" alt="Buffalo Industries"></figure><figure class="logo-tile"><img src="assets/brands/logos/kimberly-clark.webp" loading="lazy" decoding="async" data-preload-view="brands" alt="Kimberly-Clark Professional"></figure><figure class="logo-tile"><img src="assets/brands/logos/crc.webp" loading="lazy" decoding="async" data-preload-view="brands" alt="CRC"></figure><figure class="logo-tile"><img src="assets/brands/logos/wd-40.webp" loading="lazy" decoding="async" data-preload-view="brands" alt="WD-40"></figure><figure class="logo-tile"><img src="assets/brands/logos/hubbell.webp" loading="lazy" decoding="async" data-preload-view="brands" alt="Hubbell"></figure><figure class="logo-tile"><img src="assets/brands/logos/band-it.webp" loading="lazy" decoding="async" data-preload-view="brands" alt="BAND-IT"></figure>
-      <figure class="logo-tile"><img src="assets/brands/logos/dosivac.webp" loading="lazy" decoding="async" data-preload-view="brands" alt="Dosivac"></figure><figure class="logo-tile"><img src="assets/brands/logos/nomad.webp" loading="lazy" decoding="async" data-preload-view="brands" alt="Nomad"></figure><figure class="logo-tile"><img src="assets/brands/logos/makita.webp" loading="lazy" decoding="async" data-preload-view="brands" alt="Makita"></figure><figure class="logo-tile"><img src="assets/brands/logos/geko.webp" loading="lazy" decoding="async" data-preload-view="brands" alt="Geko Pipe Clamps"></figure><figure class="logo-tile"><img src="assets/brands/logos/loctite.webp" loading="lazy" decoding="async" data-preload-view="brands" alt="Loctite"></figure><figure class="logo-tile"><img src="assets/brands/logos/technofink.webp" loading="lazy" decoding="async" data-preload-view="brands" alt="Technofink"></figure><figure class="logo-tile"><img src="assets/brands/logos/diablo.webp" loading="lazy" decoding="async" data-preload-view="brands" alt="Diablo"></figure><figure class="logo-tile"><img src="assets/brands/logos/koehler-bright-star.webp" loading="lazy" decoding="async" data-preload-view="brands" alt="Koehler Bright Star"></figure><figure class="logo-tile"><img src="assets/brands/logos/honeywell.webp" loading="lazy" decoding="async" data-preload-view="brands" alt="Honeywell"></figure><figure class="logo-tile"><img src="assets/brands/logos/us-tape.webp" loading="lazy" decoding="async" data-preload-view="brands" alt="U.S. Tape"></figure><figure class="logo-tile"><img src="assets/brands/logos/xylem.webp" loading="lazy" decoding="async" data-preload-view="brands" alt="Xylem"></figure><figure class="logo-tile"><img src="assets/brands/logos/denso.webp" loading="lazy" decoding="async" data-preload-view="brands" alt="DENSO"></figure><figure class="logo-tile"><img src="assets/brands/logos/klein-tools.webp" loading="lazy" decoding="async" data-preload-view="brands" alt="Klein Tools"></figure><figure class="logo-tile"><img src="assets/brands/logos/speakman.webp" loading="lazy" decoding="async" data-preload-view="brands" alt="Speakman"></figure><figure class="logo-tile"><img src="assets/brands/logos/simple-green.webp" loading="lazy" decoding="async" data-preload-view="brands" alt="Simple Green"></figure><figure class="logo-tile"><img src="assets/brands/logos/milwaukee.webp" loading="lazy" decoding="async" data-preload-view="brands" alt="Milwaukee"></figure><figure class="logo-tile"><img src="assets/brands/logos/clr-pro.webp" loading="lazy" decoding="async" data-preload-view="brands" alt="CLR PRO"></figure><figure class="logo-tile"><img src="assets/brands/logos/chance.webp" loading="lazy" decoding="async" data-preload-view="brands" alt="CHANCE"></figure><figure class="logo-tile"><img src="assets/brands/logos/buffalo.webp" loading="lazy" decoding="async" data-preload-view="brands" alt="Buffalo Industries"></figure><figure class="logo-tile"><img src="assets/brands/logos/kimberly-clark.webp" loading="lazy" decoding="async" data-preload-view="brands" alt="Kimberly-Clark Professional"></figure><figure class="logo-tile"><img src="assets/brands/logos/crc.webp" loading="lazy" decoding="async" data-preload-view="brands" alt="CRC"></figure><figure class="logo-tile"><img src="assets/brands/logos/wd-40.webp" loading="lazy" decoding="async" data-preload-view="brands" alt="WD-40"></figure><figure class="logo-tile"><img src="assets/brands/logos/hubbell.webp" loading="lazy" decoding="async" data-preload-view="brands" alt="Hubbell"></figure><figure class="logo-tile"><img src="assets/brands/logos/band-it.webp" loading="lazy" decoding="async" data-preload-view="brands" alt="BAND-IT"></figure>
+
+      <div class="brand-proof">
+        <div class="brand-proof-count">
+          <span class="brand-status" aria-hidden="true"><i></i></span>
+          <b data-count="24">0</b>
+          <span>partner brands</span>
+        </div>
+        <p>Selected for the job: flow, protection, repair, tools and critical stock.</p>
       </div>
+
+      <div class="brand-rail" aria-label="AMCOL trusted partner brand logos">
+        <div class="brand-rail-glow" aria-hidden="true"></div>
+        <div class="logo-marquee" data-marquee>
+          <div class="logo-track" data-marquee-track>
+            <figure class="logo-tile"><img src="assets/brands/logos/dosivac.webp" loading="lazy" decoding="async" data-preload-view="brands" alt="Dosivac"></figure>
+            <figure class="logo-tile"><img src="assets/brands/logos/nomad.webp" loading="lazy" decoding="async" data-preload-view="brands" alt="Nomad"></figure>
+            <figure class="logo-tile"><img src="assets/brands/logos/makita.webp" loading="lazy" decoding="async" data-preload-view="brands" alt="Makita"></figure>
+            <figure class="logo-tile"><img src="assets/brands/logos/geko.webp" loading="lazy" decoding="async" data-preload-view="brands" alt="Geko Pipe Clamps"></figure>
+            <figure class="logo-tile"><img src="assets/brands/logos/loctite.webp" loading="lazy" decoding="async" data-preload-view="brands" alt="Loctite"></figure>
+            <figure class="logo-tile"><img src="assets/brands/logos/technofink.webp" loading="lazy" decoding="async" data-preload-view="brands" alt="Technofink"></figure>
+            <figure class="logo-tile"><img src="assets/brands/logos/diablo.webp" loading="lazy" decoding="async" data-preload-view="brands" alt="Diablo"></figure>
+            <figure class="logo-tile"><img src="assets/brands/logos/koehler-bright-star.webp" loading="lazy" decoding="async" data-preload-view="brands" alt="Koehler Bright Star"></figure>
+            <figure class="logo-tile"><img src="assets/brands/logos/honeywell.webp" loading="lazy" decoding="async" data-preload-view="brands" alt="Honeywell"></figure>
+            <figure class="logo-tile"><img src="assets/brands/logos/us-tape.webp" loading="lazy" decoding="async" data-preload-view="brands" alt="U.S. Tape"></figure>
+            <figure class="logo-tile"><img src="assets/brands/logos/xylem.webp" loading="lazy" decoding="async" data-preload-view="brands" alt="Xylem"></figure>
+            <figure class="logo-tile"><img src="assets/brands/logos/denso.webp" loading="lazy" decoding="async" data-preload-view="brands" alt="DENSO"></figure>
+            <figure class="logo-tile"><img src="assets/brands/logos/klein-tools.webp" loading="lazy" decoding="async" data-preload-view="brands" alt="Klein Tools"></figure>
+            <figure class="logo-tile"><img src="assets/brands/logos/speakman.webp" loading="lazy" decoding="async" data-preload-view="brands" alt="Speakman"></figure>
+            <figure class="logo-tile"><img src="assets/brands/logos/simple-green.webp" loading="lazy" decoding="async" data-preload-view="brands" alt="Simple Green"></figure>
+            <figure class="logo-tile"><img src="assets/brands/logos/milwaukee.webp" loading="lazy" decoding="async" data-preload-view="brands" alt="Milwaukee"></figure>
+            <figure class="logo-tile"><img src="assets/brands/logos/clr-pro.webp" loading="lazy" decoding="async" data-preload-view="brands" alt="CLR PRO"></figure>
+            <figure class="logo-tile"><img src="assets/brands/logos/chance.webp" loading="lazy" decoding="async" data-preload-view="brands" alt="CHANCE"></figure>
+            <figure class="logo-tile"><img src="assets/brands/logos/buffalo.webp" loading="lazy" decoding="async" data-preload-view="brands" alt="Buffalo Industries"></figure>
+            <figure class="logo-tile"><img src="assets/brands/logos/kimberly-clark.webp" loading="lazy" decoding="async" data-preload-view="brands" alt="Kimberly-Clark Professional"></figure>
+            <figure class="logo-tile"><img src="assets/brands/logos/crc.webp" loading="lazy" decoding="async" data-preload-view="brands" alt="CRC"></figure>
+            <figure class="logo-tile"><img src="assets/brands/logos/wd-40.webp" loading="lazy" decoding="async" data-preload-view="brands" alt="WD-40"></figure>
+            <figure class="logo-tile"><img src="assets/brands/logos/hubbell.webp" loading="lazy" decoding="async" data-preload-view="brands" alt="Hubbell"></figure>
+            <figure class="logo-tile"><img src="assets/brands/logos/band-it.webp" loading="lazy" decoding="async" data-preload-view="brands" alt="BAND-IT"></figure>
+          </div>
+        </div>
       </div>
-      <div class="brand-footnote"><span class="label">For Massy Wood</span><p>Start with the brands that solve immediate work-front needs, then consolidate replenishment, purchasing and supplier coordination through one AMCOL relationship.</p><button class="btn primary" data-goto="partnership">Build the supply program <b>&rarr;</b></button></div>
+
+      <div class="brand-footnote">
+        <div class="brand-footnote-copy">
+          <span class="label">Ready to consolidate supply?</span>
+          <p>Start with the brands that solve immediate work-front needs, then consolidate replenishment, purchasing and supplier coordination through one AMCOL relationship.</p>
+        </div>
+        <button class="btn primary brand-cta" data-goto="partnership">Build the supply program <b aria-hidden="true">→</b></button>
+      </div>
     </section>
 
-    <section class="view" id="v-services">
+    <section class="view" id="v-services" data-section="services">
+      <div class="chapter-break"><span>04</span><h2>Services</h2><i></i><small>Value-added support</small></div>
       <div class="section-intro split-intro">
         <div><div class="eyebrow"><span class="s-index">S.04</span>Value-added services</div><h2>When the scope calls for more than a purchase order.</h2></div>
         <p>AMCOL&apos;s 2026 catalogue positions the company as an industrial solutions partner - adding field, workshop and specialist support around its product range.</p>
@@ -145,7 +390,8 @@
       <div class="service-footer"><span class="label">Massy Wood opportunity</span><p>Pair a replenishment supply agreement with on-call support for project surges, shutdowns, repairs and specialist work-fronts.</p><button class="btn primary" data-goto="partnership">Build the service model <b>&rarr;</b></button></div>
     </section>
 
-    <section class="view" id="v-fit">
+    <section class="view" id="v-fit" data-section="fit">
+      <div class="chapter-break"><span>05</span><h2>Operational fit</h2><i></i><small>Where the portfolio works</small></div>
       <div class="section-intro">
         <div class="eyebrow"><span class="s-index">S.05</span>Operational fit</div><h2>Designed around Massy Wood&apos;s live work-fronts.</h2><p>The strongest partnership starts with the products and services that are used continuously - then expands as results are proven.</p>
       </div>
@@ -160,7 +406,8 @@
       <div class="focus-grid"><article><span class="label">Lead with</span><h3>Safety + pipe integrity</h3><p>High-consumption PPE and rapid-response repair solutions create a practical starting point with visible operational value.</p></article><article><span class="label">Consolidate</span><h3>Valves + fittings</h3><p>Bring process, hook-up and commissioning items into the same relationship to reduce vendor friction.</p></article><article><span class="label">Extend</span><h3>Services + projects</h3><p>Engage AMCOL&apos;s service capability when scope complexity, surge capacity or specialist support is required.</p></article></div>
     </section>
 
-    <section class="view" id="v-why-now">
+    <section class="view" id="v-why-now" data-section="why-now">
+      <div class="chapter-break"><span>06</span><h2>Why now</h2><i></i><small>Timing and availability</small></div>
       <div class="section-intro split-intro"><div><div class="eyebrow"><span class="s-index">S.06</span>Why now</div><h2>When supply timing becomes an operating decision.</h2></div><p>For critical work-fronts, the question is not simply where an item is made. It is whether it is available before a delay turns into lost production, added logistics or a compromised turnaround.</p></div>
       <div class="lead-time-panel reveal"><div><span class="label">The local availability case</span><b>Same-day local</b><p>versus <strong>8-14 days by sea</strong> for a typical imported replenishment cycle.</p></div><p>Local stock, approved alternatives and a first-call partner create a practical buffer between a missing part and a costly operational interruption.</p></div>
       <div class="photo-band reveal" style="background-image:url('assets/optimized/band-offshore-rig.webp')">
@@ -178,7 +425,8 @@
       <div class="vmi-stage reveal"><div><span class="label">Vendor-managed inventory</span><h2>Keep cash in the business - and critical stock within reach.</h2><p>VMI turns recurring MRO demand into a controlled service model: define critical items, agree min/max levels, replenish to schedule, and use consignment where it makes commercial sense.</p></div><ol><li><b>01</b><span>Set min/max by work-front, usage and criticality.</span></li><li><b>02</b><span>Stage approved fast-movers through yard, site or consignment stock.</span></li><li><b>03</b><span>Monitor, replenish and report - with fewer emergency purchases and less cash tied up in excess inventory.</span></li></ol></div>
     </section>
 
-    <section class="view" id="v-partnership">
+    <section class="view" id="v-partnership" data-section="partnership">
+      <div class="chapter-break"><span>07</span><h2>Partnership</h2><i></i><small>The working model</small></div>
       <div class="section-intro split-intro"><div><div class="eyebrow"><span class="s-index">S.07</span>Partnership model</div><h2>Flexible enough for how Massy Wood works.</h2></div><p>Start with an immediate supply need, then shape a long-term model around stock, kitting, response time and project support.</p></div>
       <div class="photo-band" style="background-image:url('assets/optimized/band-warehouse.webp')">
         <div class="photo-band-inner">
@@ -196,7 +444,8 @@
       <div class="partnership-banner"><div><img src="assets/optimized/sealball-kit.webp" loading="lazy" decoding="async" data-preload-view="partnership" alt="SealBall repair kit"></div><div><span class="label">A relationship built to scale</span><h3>Start practical. Prove performance. Expand with confidence.</h3><p>Every stage can be measured around availability, responsiveness, compliance and reduced administrative effort.</p></div><button class="text-btn" data-goto="roadmap">See the pathway &rarr;</button></div>
     </section>
 
-    <section class="view" id="v-roadmap">
+    <section class="view" id="v-roadmap" data-section="roadmap">
+      <div class="chapter-break"><span>08</span><h2>Roadmap</h2><i></i><small>Activation path</small></div>
       <div class="section-intro"><div class="eyebrow"><span class="s-index">S.08</span>Activation roadmap</div><h2>A low-friction path to a stronger supply chain.</h2><p>Move from catalogue review to a partnership that is visible in the field, without disrupting current operations.</p></div>
       <div class="timeline">
         <article><span>01</span><h3>Map the need</h3><p>Review priority work-fronts, product standards and replenishment patterns with supply-chain and maintenance leads.</p></article>
@@ -212,6 +461,6 @@
     </section>
   </main>
   <footer><div><span>Massy Wood &times; AMCOL</span><p>Product, service and partner-brand details are based on AMCOL's 2026 company profile and industrial catalogue.</p></div><small>Strategic Industrial Partnership &middot; 2026</small></footer>
-  <script src="js/app.js"></script>
+  <script type="module" src="js/app.js"></script>
 </body>
 </html>
