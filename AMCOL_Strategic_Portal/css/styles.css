@@ -36,6 +36,7 @@ main{padding:0 28px;min-height:calc(100vh - 147px)}.view{display:none;padding:52
 /* Cominvi-inspired flow: numbered sections, full-bleed photo bands, logo marquee, service accordion. */
 .s-index{display:inline-flex;align-items:center;justify-content:center;padding:2px 7px;margin-right:2px;border:1px solid rgba(62,180,217,.4);border-radius:4px;color:var(--cyan);font:600 10px "IBM Plex Mono",monospace;letter-spacing:.06em;line-height:1.5}
 .photo-band{position:relative;margin-top:26px;min-height:300px;border-radius:16px;overflow:hidden;border:1px solid var(--line);display:flex;align-items:flex-end;background-size:cover;background-position:center;box-shadow:var(--shadow)}
+.photo-band--animated{background-position:center 42%}
 .photo-band:before{content:"";position:absolute;inset:0;background:linear-gradient(100deg,rgba(5,16,26,.96) 0%,rgba(5,16,26,.62) 44%,rgba(5,16,26,.18) 100%)}
 .photo-band-inner{position:relative;z-index:1;padding:34px 40px;max-width:540px}
 .photo-band .label{color:var(--orange)}
@@ -44,11 +45,6 @@ main{padding:0 28px;min-height:calc(100vh - 147px)}.view{display:none;padding:52
 .photo-band-stat{display:flex;gap:26px;margin-top:18px}
 .photo-band-stat b{display:block;font:800 26px/1 Archivo,sans-serif;color:var(--cyan)}
 .photo-band-stat span{display:block;margin-top:4px;color:#a9bdc6;font-size:10px;text-transform:uppercase;letter-spacing:.08em}
-.logo-marquee{overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent,#000 5%,#000 95%,transparent);mask-image:linear-gradient(90deg,transparent,#000 5%,#000 95%,transparent)}
-.logo-track{display:flex;gap:10px;width:max-content}
-.logo-marquee:hover .logo-track{animation-play-state:paused}
-.logo-track .logo-tile{flex:none;width:154px}
-@keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 .accordion-item{border-bottom:1px solid var(--line)}
 .accordion-item:last-child{border-bottom:0}
 .accordion-head{width:100%;display:grid;grid-template-columns:52px 1fr 26px;gap:14px;align-items:center;background:none;border:0;padding:22px 0;cursor:pointer;text-align:left;color:var(--ink)}
@@ -60,8 +56,7 @@ main{padding:0 28px;min-height:calc(100vh - 147px)}.view{display:none;padding:52
 .accordion-body p{margin:0 0 22px;padding-right:20px;color:var(--muted);font-size:13px;max-width:46ch}
 .accordion-item.open .accordion-body{max-height:140px}
 @media(max-width:1000px){.photo-band-inner{max-width:none}}
-@media(max-width:720px){.photo-band{min-height:250px}.photo-band-inner{padding:24px 22px}.photo-band-stat{gap:18px}.logo-track .logo-tile{width:118px}.accordion-head{grid-template-columns:38px 1fr 24px;gap:10px}}
-@media(prefers-reduced-motion:reduce){.logo-track{animation:none}}
+@media(max-width:720px){.photo-band{min-height:250px}.photo-band-inner{padding:24px 22px}.photo-band-stat{gap:18px}.accordion-head{grid-template-columns:38px 1fr 24px;gap:10px}}
 
 /* Exact AMCOL × Massy collaboration artwork, held as a compact header banner. */
 .header-with-collaboration{position:relative;max-width:none;width:100%;margin:0;min-height:128px;gap:28px;background:linear-gradient(100deg,#061731 0%,#07121c 31%,#07121c 100%)}.header-with-collaboration:before{content:"";position:absolute;inset:9px 28px auto;height:1px;background:linear-gradient(90deg,rgba(62,180,217,.55),rgba(159,190,204,.18) 28%,transparent 70%)}.header-with-collaboration:after{content:"";position:absolute;inset:auto 28px 9px;height:1px;background:linear-gradient(90deg,rgba(159,190,204,.22),transparent 48%)}.header-collaboration{position:relative;z-index:1;display:flex;align-items:center;flex:none;height:100%;padding-right:30px;border-right:1px solid var(--line)}.header-collaboration img{display:block;height:88px;width:auto;max-width:420px;object-fit:contain;object-position:left center}.header-with-collaboration nav{position:relative;z-index:1;align-self:center}
@@ -152,12 +147,12 @@ main{padding:0 28px;min-height:calc(100vh - 147px)}.view{display:none;padding:52
   .showcase-connectors path{stroke-dasharray:none}
 }
 
-/* Brands rail: dark logo cards, soft edge masks, technical grid, GSAP marquee */
+/* Brands rail: stepped industrial supply track */
 #v-brands{padding-bottom:58px}
-.brands-intro{align-items:center;gap:48px}
+.brands-intro{align-items:end;gap:58px;margin-bottom:20px}
 .brands-intro h2{margin-bottom:0}
 .brands-intro>p{margin:0;font-size:16px;line-height:1.75;color:var(--muted);max-width:48ch}
-.brand-proof{display:flex;align-items:center;gap:28px;margin:8px 0 28px;padding:22px 26px;border:1px solid rgba(62,180,217,.28);border-radius:14px;background:linear-gradient(105deg,rgba(62,180,217,.1),rgba(13,28,39,.55) 42%,rgba(239,110,54,.06))}
+.brand-proof{display:flex;align-items:center;gap:28px;margin:8px 0 22px;padding:20px 24px;border:1px solid rgba(62,180,217,.32);border-radius:8px;background:linear-gradient(105deg,rgba(62,180,217,.08),rgba(13,28,39,.62) 42%,rgba(239,110,54,.07));box-shadow:inset 0 0 0 1px rgba(255,255,255,.025)}
 .brand-proof-count{display:flex;align-items:baseline;gap:12px;flex:none}
 .brand-proof-count b{font:800 clamp(42px,5vw,64px)/.9 Archivo,sans-serif;letter-spacing:-.06em;color:var(--cyan)}
 .brand-proof-count>span:last-child{font:600 11px "IBM Plex Mono",monospace;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
@@ -165,22 +160,48 @@ main{padding:0 28px;min-height:calc(100vh - 147px)}.view{display:none;padding:52
 .brand-status i{display:block;width:8px;height:8px;border-radius:50%;background:var(--lime);box-shadow:0 0 0 4px rgba(167,200,52,.14)}
 .brand-status:after{content:"";position:absolute;inset:-5px;border:1px solid rgba(167,200,52,.45);border-radius:50%;animation:brandPulse 2.4s ease-out infinite}
 .brand-proof>p{margin:0;max-width:36ch;color:#b7c8d0;font-size:14px;line-height:1.55}
-.brand-rail{position:relative;isolation:isolate;margin:0 0 28px;padding:34px 0 36px;border:1px solid rgba(159,190,204,.16);border-radius:16px;overflow:hidden;background:
-  linear-gradient(180deg,rgba(8,20,30,.2),rgba(7,18,28,.55)),
-  repeating-linear-gradient(0deg,transparent 0 27px,rgba(62,180,217,.045) 27px 28px),
-  repeating-linear-gradient(90deg,transparent 0 27px,rgba(62,180,217,.045) 27px 28px),
-  radial-gradient(ellipse at 18% 50%,rgba(62,180,217,.12),transparent 42%),
-  radial-gradient(ellipse at 86% 40%,rgba(239,110,54,.08),transparent 40%),
-  #0a1620}
-.brand-rail:before{content:"";position:absolute;inset:18px 22px auto;height:1px;background:linear-gradient(90deg,transparent,rgba(62,180,217,.35),rgba(239,110,54,.2),transparent);z-index:1;pointer-events:none}
-.brand-rail:after{content:"";position:absolute;inset:auto 22px 18px;height:1px;background:linear-gradient(90deg,transparent,rgba(159,190,204,.18),transparent);z-index:1;pointer-events:none}
-.brand-rail-glow{position:absolute;left:50%;top:50%;width:70%;height:70%;transform:translate(-50%,-50%);background:radial-gradient(circle,rgba(62,180,217,.1),transparent 68%);pointer-events:none;z-index:0}
-.logo-marquee{position:relative;z-index:1;overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent 0%,#000 2.5%,#000 97.5%,transparent 100%);mask-image:linear-gradient(90deg,transparent 0%,#000 2.5%,#000 97.5%,transparent 100%)}
-.logo-track{display:flex;gap:18px;width:max-content;will-change:transform}
-.logo-track .logo-tile{flex:none;width:168px;min-height:108px;margin:0;padding:18px 20px;border-radius:12px;border:1px solid rgba(120,160,180,.14);background:linear-gradient(160deg,rgba(18,36,48,.92),rgba(10,22,32,.88));display:grid;place-items:center;overflow:hidden;transition:border-color .25s ease,box-shadow .25s ease,transform .25s ease,background .25s ease}
-.logo-track .logo-tile img{display:block;width:100%;height:54px;object-fit:contain;opacity:1;transition:transform .25s ease,opacity .25s ease}
-.logo-track .logo-tile:hover,.logo-track .logo-tile:focus-within{transform:translateY(-3px);border-color:rgba(62,180,217,.62);background:linear-gradient(160deg,rgba(22,48,62,.96),rgba(12,28,40,.92));box-shadow:0 0 0 1px rgba(62,180,217,.18),0 12px 28px rgba(0,0,0,.28),0 0 24px rgba(62,180,217,.12)}
-.logo-track .logo-tile:hover img,.logo-track .logo-tile:focus-within img{transform:scale(1.04)}
+.brand-network{position:relative;isolation:isolate;margin:0 0 28px;padding:18px 20px 20px;border:2px solid rgba(159,190,204,.24);border-radius:8px;overflow:hidden;background:
+  linear-gradient(180deg,rgba(255,255,255,.035),transparent 18%,rgba(0,0,0,.28)),
+  repeating-linear-gradient(0deg,rgba(62,180,217,.035) 0 1px,transparent 1px 24px),
+  repeating-linear-gradient(90deg,rgba(62,180,217,.035) 0 1px,transparent 1px 24px),
+  linear-gradient(135deg,rgba(9,22,32,.98),rgba(6,15,23,.96));
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,.035),inset 0 14px 35px rgba(0,0,0,.34),0 22px 46px rgba(0,0,0,.24)}
+.brand-network:before,.brand-network:after{content:"";position:absolute;left:18px;right:18px;height:3px;z-index:1;pointer-events:none;background:linear-gradient(90deg,rgba(62,180,217,.58),rgba(239,110,54,.48) 18%,rgba(159,190,204,.16) 50%,rgba(62,180,217,.38))}
+.brand-network:before{top:8px}.brand-network:after{bottom:8px;opacity:.65}
+.brand-network-topline{position:relative;z-index:3;display:flex;align-items:center;justify-content:space-between;gap:18px;margin:0 0 18px;padding:4px 2px 12px;border-bottom:1px solid rgba(159,190,204,.2)}
+.brand-network-topline b{display:block;margin-top:5px;color:#eaf4f7;font:700 15px Archivo,sans-serif;letter-spacing:.01em;text-transform:uppercase}
+.brand-network-actions{display:flex;align-items:center;gap:12px;flex:none}.brand-network-actions>span{color:var(--cyan);font:600 11px "IBM Plex Mono",monospace;letter-spacing:.1em;text-transform:uppercase}.brand-focus-trigger,.brand-focus-fit,.brand-focus-close{display:inline-flex;align-items:center;justify-content:center;gap:7px;border:1px solid rgba(159,190,204,.3);border-radius:4px;background:linear-gradient(180deg,rgba(20,42,55,.96),rgba(8,18,28,.96));color:#d8eef5;cursor:pointer;font:700 10px "IBM Plex Mono",monospace;letter-spacing:.09em;text-transform:uppercase;box-shadow:inset 0 1px 0 rgba(255,255,255,.08);transition:border-color .2s ease,color .2s ease,transform .2s ease,box-shadow .2s ease}.brand-focus-trigger{min-height:38px;padding:0 13px}.brand-focus-trigger b{margin:0;color:var(--cyan);font:700 13px/1 "IBM Plex Mono",monospace}.brand-focus-trigger:hover,.brand-focus-trigger:focus-visible,.brand-focus-fit:hover,.brand-focus-fit:focus-visible,.brand-focus-close:hover,.brand-focus-close:focus-visible{border-color:rgba(62,180,217,.78);color:#fff;transform:translateY(-1px);box-shadow:inset 0 1px 0 rgba(255,255,255,.1),0 0 18px rgba(62,180,217,.16);outline:0}
+.brand-network-preview{height:903px;overflow:hidden}.brand-network-preview>.brand-network-stage{width:116.28%;margin-left:-8.14%;transform:scale(.86);transform-origin:top center}
+.brand-network-stage{position:relative;z-index:2;min-height:1050px;overflow:hidden;border:1px solid rgba(62,180,217,.24);border-radius:6px;background:radial-gradient(circle at 50% 50%,rgba(62,180,217,.08),transparent 28%),linear-gradient(180deg,rgba(3,10,16,.62),rgba(13,28,39,.48));box-shadow:inset 0 0 32px rgba(0,0,0,.42)}
+.brand-network-stage:has(.brand-node:hover) .brand-node:not(:hover){opacity:.87}
+.brand-network-stage:has(.brand-node:hover) .brand-hub{border-color:rgba(62,180,217,.78);box-shadow:inset 0 0 0 10px rgba(62,180,217,.045),inset 0 0 34px rgba(62,180,217,.12),0 0 46px rgba(62,180,217,.24),0 20px 44px rgba(0,0,0,.42)}
+.brand-network-stage:has(.brand-node:hover) .brand-hub:before{box-shadow:0 0 16px rgba(62,180,217,.16),0 0 0 9px rgba(239,110,54,.06)}
+.brand-network-stage:has(.brand-node--flow:hover) .connector--flow,.brand-network-stage:has(.brand-node--repair:hover) .connector--repair,.brand-network-stage:has(.brand-node--safety:hover) .connector--safety,.brand-network-stage:has(.brand-node--mro:hover) .connector--mro,.brand-network-stage:has(.brand-node--tools:hover) .connector--tools{stroke:rgba(62,180,217,.72);filter:drop-shadow(0 0 8px rgba(62,180,217,.28))}
+.brand-network-stage:has(.brand-node--flow:hover) .junction--flow,.brand-network-stage:has(.brand-node--repair:hover) .junction--repair,.brand-network-stage:has(.brand-node--safety:hover) .junction--safety,.brand-network-stage:has(.brand-node--mro:hover) .junction--mro,.brand-network-stage:has(.brand-node--tools:hover) .junction--tools{stroke:rgba(62,180,217,.95);filter:drop-shadow(0 0 9px rgba(62,180,217,.42))}
+.brand-guide-rings{position:absolute;left:50%;top:50%;z-index:0;width:610px;height:610px;transform:translate(-50%,-50%);border:1px solid rgba(62,180,217,.16);border-radius:50%;box-shadow:0 0 0 94px rgba(62,180,217,.025),0 0 0 174px rgba(159,190,204,.018);pointer-events:none}
+.brand-guide-rings:before,.brand-guide-rings:after{content:"";position:absolute;border-radius:50%;pointer-events:none}.brand-guide-rings:before{inset:58px;border:1px dashed rgba(239,110,54,.12)}.brand-guide-rings:after{inset:-10px;border:1px dashed rgba(159,190,204,.1)}
+.brand-connector-map{position:absolute;inset:0;z-index:1;width:100%;height:100%;pointer-events:none}.brand-connector-map .connector{fill:none;stroke:rgba(62,180,217,.45);stroke-width:2;stroke-linecap:square;stroke-dasharray:34 9 6 9;filter:drop-shadow(0 0 5px rgba(62,180,217,.16))}.brand-connector-map .junction{fill:#07121c;stroke:rgba(62,180,217,.68);stroke-width:2;filter:drop-shadow(0 0 6px rgba(62,180,217,.24))}
+.brand-hub{position:absolute;left:50%;top:52%;z-index:4;width:210px;height:210px;transform:translate(-50%,-50%);display:grid;place-items:center;text-align:center;padding:26px;border:1px solid rgba(62,180,217,.7);border-radius:50%;background:radial-gradient(circle,rgba(27,66,82,.98),rgba(5,16,26,.98) 66%);box-shadow:inset 0 0 0 10px rgba(62,180,217,.04),inset 0 0 32px rgba(62,180,217,.1),0 0 42px rgba(62,180,217,.22),0 20px 42px rgba(0,0,0,.4);transition:border-color .22s ease,box-shadow .22s ease}
+.brand-hub:before{content:"";position:absolute;inset:-15px;border:1px solid rgba(62,180,217,.28);border-radius:50%;box-shadow:0 0 0 9px rgba(239,110,54,.045);animation:hubOuterPulse 2.8s cubic-bezier(.22,1,.36,1) infinite}.brand-hub:after{content:"";position:absolute;inset:-33px;border:1px solid rgba(239,110,54,.2);clip-path:polygon(50% 0,96% 25%,96% 75%,50% 100%,4% 75%,4% 25%)}
+.brand-hub span,.brand-hub small{position:relative;z-index:1;color:var(--cyan);font:700 10px "IBM Plex Mono",monospace;letter-spacing:.12em;text-transform:uppercase}.brand-hub img{position:relative;z-index:1;width:134px;max-width:100%;height:auto;object-fit:contain;filter:drop-shadow(0 0 12px rgba(62,180,217,.16))}.brand-hub small{color:#aebfc7;font-size:9px}
+.brand-node{--line-x:50%;--line-y:50%;--node-transform:translateY(0);position:absolute;z-index:3;width:min(31%,324px);padding:17px;border:1px solid rgba(159,190,204,.23);border-radius:7px;background:linear-gradient(180deg,rgba(13,30,41,.92),rgba(6,17,26,.9));box-shadow:inset 0 0 0 1px rgba(255,255,255,.025),0 16px 32px rgba(0,0,0,.24);transform:var(--node-transform);transition:opacity .22s ease,border-color .22s ease,box-shadow .22s ease,transform .22s ease}
+.brand-node:hover{transform:var(--node-transform) translateY(-2px);border-color:rgba(62,180,217,.5);box-shadow:inset 0 0 0 1px rgba(255,255,255,.035),0 18px 38px rgba(0,0,0,.3),0 0 30px rgba(62,180,217,.1)}
+.brand-node:hover .brand-logo-bay{transform:translateY(-1px)}
+.brand-node-head{display:grid;grid-template-columns:1fr;gap:4px;margin-bottom:14px;padding-bottom:11px;border-bottom:1px solid rgba(159,190,204,.16)}
+.brand-node-head span{color:var(--orange);font:700 9px "IBM Plex Mono",monospace;letter-spacing:.12em;text-transform:uppercase}.brand-node-head h3{margin:0;color:#f1f8fa;font:800 18px Archivo,sans-serif;letter-spacing:-.02em;text-transform:uppercase}.brand-node-head small{color:#98afba;font:600 9px "IBM Plex Mono",monospace;letter-spacing:.1em;text-transform:uppercase}
+.brand-node-grid{counter-reset:brand-bay;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.brand-logo-bay{counter-increment:brand-bay;position:relative;margin:0;height:76px;padding:8px;border:1px solid rgba(120,160,180,.2);border-radius:4px;background:linear-gradient(180deg,rgba(9,20,30,.96),rgba(4,12,19,.98));display:grid;place-items:center;overflow:hidden;box-shadow:inset 0 0 0 1px rgba(255,255,255,.02),inset 0 -10px 18px rgba(0,0,0,.22);transition:transform .2s ease,border-color .2s ease,box-shadow .2s ease,background .2s ease}
+.brand-logo-bay:before{content:counter(brand-bay,decimal-leading-zero);position:absolute;top:5px;left:7px;z-index:2;color:rgba(62,180,217,.24);font:600 8px "IBM Plex Mono",monospace}.brand-logo-bay:after{content:"";position:absolute;left:8px;right:8px;bottom:5px;height:1px;background:linear-gradient(90deg,rgba(239,110,54,.38),rgba(62,180,217,.16))}
+.logo-plate{width:100%;height:52px;display:grid;place-items:center;border-radius:3px;background:#f7fafb;box-shadow:inset 0 0 0 1px rgba(5,16,26,.08)}
+.logo-plate img{display:block;max-width:82%;max-height:75%;width:auto;height:auto;object-fit:contain;transition:transform .2s ease,filter .2s ease}.brand-logo-bay:hover,.brand-logo-bay:focus-within{transform:translateY(-2px);border-color:rgba(62,180,217,.58);background:linear-gradient(180deg,rgba(13,27,38,.98),rgba(5,14,22,.98));box-shadow:0 0 18px rgba(62,180,217,.1)}.brand-logo-bay:hover .logo-plate img,.brand-logo-bay:focus-within .logo-plate img{transform:scale(1.025);filter:saturate(1.05) contrast(1.04)}
+.brand-node--flow{left:50%;top:3.5%;--node-transform:translateX(-50%)}
+.brand-node--flow .brand-node-grid{grid-template-columns:repeat(3,minmax(0,1fr))}
+.brand-node--safety{right:4%;top:23%}
+.brand-node--tools{right:8%;bottom:3.5%}
+.brand-node--repair{left:4%;top:23%}
+.brand-node--mro{left:8%;bottom:3.5%}
+.brand-network-note{position:relative;z-index:2;margin:14px 0 0;color:#b7c8d0;font-size:14px;line-height:1.6}
+.brand-focus-modal[hidden]{display:none}.brand-focus-modal{position:fixed;inset:0;z-index:1200;display:grid;background:rgba(2,8,13,.9);backdrop-filter:blur(10px)}.brand-focus-backdrop{position:absolute;inset:0;background:radial-gradient(circle at 50% 48%,rgba(62,180,217,.08),transparent 42%),rgba(2,8,13,.62)}.brand-focus-panel{position:relative;z-index:1;display:grid;grid-template-rows:auto 1fr;width:100%;height:100%;min-width:0;min-height:0;padding:18px 22px 22px;background:linear-gradient(180deg,rgba(7,18,28,.96),rgba(4,11,18,.98))}.brand-focus-head{display:flex;align-items:center;justify-content:space-between;gap:18px;padding:0 0 14px;border-bottom:1px solid rgba(159,190,204,.22)}.brand-focus-head h2{margin:5px 0 2px;color:#fff;font-size:20px;letter-spacing:-.02em;text-transform:uppercase}.brand-focus-head p{margin:0;color:var(--muted);font:600 10px "IBM Plex Mono",monospace;letter-spacing:.1em;text-transform:uppercase}.brand-focus-tools{display:flex;align-items:center;gap:10px;flex:none}.brand-focus-fit,.brand-focus-close{min-height:38px;padding:0 13px}.brand-focus-close{border-color:rgba(239,110,54,.35);color:#ffe7dc}.brand-focus-body{position:relative;display:flex;align-items:center;justify-content:center;width:100%;height:100%;min-width:0;min-height:0;overflow:hidden;padding:18px}.network-fit-wrapper{position:relative;width:100%;height:100%;max-width:none;max-height:none;overflow:hidden}.brand-focus-open{overflow:hidden}
 .brand-footnote{display:flex;align-items:center;gap:28px;margin-top:6px;padding:8px 0 0;border-top:0}
 .brand-footnote-copy{flex:1;min-width:0}
 .brand-footnote-copy .label{display:block;margin-bottom:8px}
@@ -189,24 +210,76 @@ main{padding:0 28px;min-height:calc(100vh - 147px)}.view{display:none;padding:52
 .brand-cta b{display:inline-block;margin-left:8px;transition:transform .25s ease}
 .brand-cta:hover b,.brand-cta:focus-visible b{transform:translateX(5px)}
 @keyframes brandPulse{0%{transform:scale(.75);opacity:.75}70%{transform:scale(1.55);opacity:0}100%{opacity:0}}
+@keyframes hubOuterPulse{0%,100%{transform:scale(1);opacity:.72;box-shadow:0 0 0 9px rgba(239,110,54,.04),0 0 10px rgba(62,180,217,.08)}50%{transform:scale(1.03);opacity:.95;box-shadow:0 0 18px rgba(62,180,217,.18),0 0 0 10px rgba(239,110,54,.055)}}
+@media(max-width:1200px) and (min-width:1001px){
+  .brand-network-stage{min-height:1120px}
+  .brand-network-preview{height:964px}
+  .brand-node{width:270px}
+  .brand-node--flow{top:4%}
+  .brand-node--repair{left:1%;top:25%}
+  .brand-node--safety{right:1%;top:25%}
+  .brand-node--mro{left:4%;bottom:3%}
+  .brand-node--tools{right:4%;bottom:3%}
+  .brand-guide-rings{width:560px;height:560px}
+  .brand-hub{width:198px;height:198px}
+  .brand-hub img{width:126px}
+}
 @media(max-width:1000px){
   .brands-intro{align-items:start;gap:18px}
   .brand-proof{align-items:flex-start;flex-direction:column;gap:12px;padding:20px}
-  .brand-rail{padding:28px 0}
-  .logo-track{gap:14px}
-  .logo-track .logo-tile{width:148px;min-height:96px;padding:14px 16px}
-  .logo-track .logo-tile img{height:46px}
+  .brand-network{padding:17px 16px 18px}
+  .brand-network-preview{height:auto;overflow:visible}
+  .brand-network-preview>.brand-network-stage{width:auto;margin-left:0;transform:none}
+  .brand-network-stage{min-height:auto;display:grid;grid-template-columns:repeat(2,1fr);gap:13px;padding:24px}
+  .brand-guide-rings{width:330px;height:330px;opacity:.45}
+  .brand-hub{position:relative;left:auto;top:auto;transform:none;grid-column:1/-1;justify-self:center;width:170px;height:170px;margin-bottom:8px}
+  .brand-hub img{width:108px}
+  .brand-node{position:relative;inset:auto;width:auto}
+  .brand-node:before{left:50%;top:-24px;width:1px;height:24px;transform:none;background:linear-gradient(180deg,rgba(62,180,217,.48),transparent)}
+  .brand-node:after{left:50%;top:0}
+  .brand-node--flow{grid-column:1/-1;--node-transform:translateY(0)}
+  .brand-node-grid{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .brand-logo-bay{height:72px}
+  .logo-plate{height:49px}
+  .brand-connector-map{display:none}
 }
-@media(max-width:720px){
+@media(max-width:650px){
   #v-brands{padding-bottom:48px}
   .brand-proof-count{gap:10px}
   .brand-proof-count b{font-size:44px}
   .brand-status{top:-12px}
-  .logo-marquee{-webkit-mask-image:linear-gradient(90deg,transparent 0%,#000 3%,#000 97%,transparent 100%);mask-image:linear-gradient(90deg,transparent 0%,#000 3%,#000 97%,transparent 100%)}
-  .logo-track .logo-tile{width:132px;min-height:88px}
+  .brand-network{padding:16px 12px 16px}
+  .brand-network-topline,.brand-network-actions{align-items:flex-start;flex-direction:column;gap:9px}
+  .brand-focus-panel{padding:14px}
+  .brand-focus-head{align-items:flex-start;flex-direction:column}
+  .brand-focus-tools{width:100%}
+  .brand-focus-fit,.brand-focus-close{flex:1}
+  .brand-focus-body{padding:10px 0}
+  .brand-network-stage{grid-template-columns:1fr;padding:18px 12px}
+  .brand-guide-rings{width:230px;height:230px;opacity:.28}
+  .brand-hub{width:150px;height:150px}
+  .brand-hub img{width:92px}
+  .brand-node-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .brand-logo-bay{height:68px}
+  .logo-plate{height:45px}
   .brand-footnote{flex-direction:column;align-items:stretch;gap:16px}
   .brand-cta{width:100%}
 }
+.brand-focus-body .brand-network-stage{position:absolute;display:block;width:1240px;height:900px;max-width:none;max-height:none;min-height:0;padding:0;overflow:hidden;margin:0;transform-origin:0 0;flex:none}
+.brand-focus-body .brand-connector-map{display:block}
+.brand-focus-body .brand-guide-rings{position:absolute;left:50%;top:50%;z-index:0;width:610px;height:610px;opacity:1;transform:translate(-50%,-50%)}
+.brand-focus-body .brand-hub{position:absolute;left:50%;top:52%;width:210px;height:210px;margin:0;transform:translate(-50%,-50%)}
+.brand-focus-body .brand-node{position:absolute;inset:auto;width:324px}
+.brand-focus-body .brand-node--flow{left:50%;top:2.5%;--node-transform:translateX(-50%);grid-column:auto}
+.brand-focus-body .brand-node--repair{left:4%;top:11%}
+.brand-focus-body .brand-node--safety{right:4%;top:11%}
+.brand-focus-body .brand-node--mro{left:8%;bottom:2.5%}
+.brand-focus-body .brand-node--tools{right:8%;bottom:2.5%}
+.brand-focus-body .brand-node-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+.brand-focus-body .brand-node--flow .brand-node-grid{grid-template-columns:repeat(3,minmax(0,1fr))}
+.brand-focus-body .brand-logo-bay{height:76px}.brand-focus-body .logo-plate{height:52px}
 @media(prefers-reduced-motion:reduce){
   .brand-status:after{animation:none}
+  .brand-hub:before{animation:none}
+  .brand-node,.brand-logo-bay{transition:none}
 }

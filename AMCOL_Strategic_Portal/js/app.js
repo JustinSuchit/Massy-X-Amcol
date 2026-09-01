@@ -292,7 +292,7 @@ function initHeroNetwork(){
       brands:function(){
         entrance(view.querySelector(".brands-intro"),{y:20,duration:0.8});
         entrance(view.querySelector(".brand-proof"),{y:18,duration:0.8,delay:0.08});
-        entrance(view.querySelector(".brand-rail"),{y:0,duration:1,delay:0.18});
+        entrance(view.querySelector(".brand-network"),{y:0,duration:1,delay:0.18});
         entrance(view.querySelector(".brand-footnote"),{delay:0.32,duration:0.8});
         runCounts(view);
       },
@@ -690,53 +690,104 @@ function initHeroNetwork(){
     selectProduct(current,{force:true});
   }
 
-  function setupBrandMarquee(){
-    var marquee=document.querySelector("[data-marquee]");
-    var track=document.querySelector("[data-marquee-track]");
-    if(!marquee||!track)return;
+  function setupBrandFocusView(){
+    var openButton=document.querySelector("[data-brand-focus-open]");
+    var modal=document.getElementById("brand-focus-modal");
+    var focusBody=document.querySelector("[data-brand-focus-body]");
+    var fitWrapper=document.querySelector("[data-brand-fit-wrapper]");
+    var closeButtons=document.querySelectorAll("[data-brand-focus-close]");
+    var fitButton=document.querySelector("[data-brand-focus-fit]");
+    var home=document.querySelector("[data-brand-network-home]");
+    var stage=home?home.querySelector(".brand-network-stage"):null;
+    if(!openButton||!modal||!focusBody||!fitWrapper||!home||!stage)return;
 
-    var originals=[].slice.call(track.children);
-    if(!originals.length)return;
+    var lastFocused=null;
 
-    // Duplicate the set once for a seamless loop
-    originals.forEach(function(tile){
-      var clone=tile.cloneNode(true);
-      clone.setAttribute("aria-hidden","true");
-      clone.querySelectorAll("img").forEach(function(img){
-        img.removeAttribute("data-preload-view");
-        img.loading="lazy";
-      });
-      track.appendChild(clone);
-    });
+    function fitNetworkToViewport(){
+      if(modal.hidden)return;
 
-    if(reduce)return;
+      stage.style.transform="none";
+      stage.style.left="0px";
+      stage.style.top="0px";
+      stage.style.width="1240px";
+      stage.style.height="900px";
+      stage.style.transformOrigin="0 0";
+      void stage.offsetWidth;
 
-    var tween=null;
-    function play(){
-      if(tween)tween.kill();
-      gsap.set(track,{x:0});
-      var distance=track.scrollWidth/2;
-      var pixelsPerSecond=42;
-      tween=gsap.to(track,{
-        x:-distance,
-        duration:Math.max(28,distance/pixelsPerSecond),
-        ease:"none",
-        repeat:-1
+      var horizontalMargin=window.innerWidth<=650?24:40;
+      var verticalMargin=window.innerWidth<=650?20:32;
+      var availableWidth=Math.max(1,fitWrapper.clientWidth-horizontalMargin);
+      var availableHeight=Math.max(1,fitWrapper.clientHeight-verticalMargin);
+      var stageRect=stage.getBoundingClientRect();
+      var measured=[].slice.call(stage.querySelectorAll(".brand-node,.brand-hub,.brand-guide-rings"));
+      var bounds=measured.reduce(function(box,element){
+        var rect=element.getBoundingClientRect();
+        return {
+          left:Math.min(box.left,rect.left-stageRect.left),
+          top:Math.min(box.top,rect.top-stageRect.top),
+          right:Math.max(box.right,rect.right-stageRect.left),
+          bottom:Math.max(box.bottom,rect.bottom-stageRect.top)
+        };
+      },{left:Infinity,top:Infinity,right:-Infinity,bottom:-Infinity});
+      if(!isFinite(bounds.left)){
+        bounds={left:0,top:0,right:stage.offsetWidth,bottom:stage.offsetHeight};
+      }
+      var networkWidth=bounds.right-bounds.left;
+      var networkHeight=bounds.bottom-bounds.top;
+      var scaleX=availableWidth/networkWidth;
+      var scaleY=availableHeight/networkHeight;
+      var scale=Math.min(scaleX,scaleY);
+      scale=Math.max(.5,Math.min(scale*0.94,1.75));
+      var left=(fitWrapper.clientWidth-(networkWidth*scale))/2-(bounds.left*scale);
+      var top=(fitWrapper.clientHeight-(networkHeight*scale))/2-(bounds.top*scale);
+
+      stage.style.left=left.toFixed(1)+"px";
+      stage.style.top=top.toFixed(1)+"px";
+      stage.style.transform="scale("+scale.toFixed(4)+")";
+    }
+
+    function openFocus(){
+      lastFocused=document.activeElement;
+      modal.hidden=false;
+      document.body.classList.add("modal-open","brand-focus-open");
+      fitWrapper.appendChild(stage);
+      window.requestAnimationFrame(function(){
+        window.requestAnimationFrame(function(){
+          fitNetworkToViewport();
+          var close=modal.querySelector(".brand-focus-close");
+          if(close)close.focus();
+        });
       });
     }
 
-    play();
-    marquee.addEventListener("pointerenter",function(){if(tween)tween.pause();});
-    marquee.addEventListener("pointerleave",function(){if(tween)tween.resume();});
-    marquee.addEventListener("focusin",function(){if(tween)tween.pause();});
-    marquee.addEventListener("focusout",function(event){
-      if(!marquee.contains(event.relatedTarget)&&tween)tween.resume();
-    });
+    function closeFocus(){
+      if(modal.hidden)return;
+      home.appendChild(stage);
+      stage.style.removeProperty("width");
+      stage.style.removeProperty("height");
+      stage.style.removeProperty("transform");
+      stage.style.removeProperty("transform-origin");
+      stage.style.removeProperty("left");
+      stage.style.removeProperty("top");
+      modal.hidden=true;
+      document.body.classList.remove("modal-open","brand-focus-open");
+      if(lastFocused&&lastFocused.focus)lastFocused.focus();
+    }
 
-    var resizeTimer=0;
-    window.addEventListener("resize",function(){
-      window.clearTimeout(resizeTimer);
-      resizeTimer=window.setTimeout(play,160);
+    openButton.addEventListener("click",openFocus);
+    closeButtons.forEach(function(button){button.addEventListener("click",closeFocus);});
+    if(fitButton)fitButton.addEventListener("click",function(){
+      window.requestAnimationFrame(fitNetworkToViewport);
+    });
+    modal.addEventListener("click",function(event){
+      if(event.target.hasAttribute("data-brand-focus-close"))closeFocus();
+    });
+    document.addEventListener("keydown",function(event){
+      if(event.key==="Escape"&&!modal.hidden)closeFocus();
+    });
+    window.addEventListener("resize",fitNetworkToViewport);
+    window.addEventListener("orientationchange",function(){
+      window.setTimeout(fitNetworkToViewport,160);
     });
   }
 
@@ -753,7 +804,7 @@ function initHeroNetwork(){
   setupRevealObserver();
   setupSectionObserver();
   setupProductShowcase();
-  setupBrandMarquee();
+  setupBrandFocusView();
   preloadView("products");
   ScrollTrigger.refresh();
 })();
