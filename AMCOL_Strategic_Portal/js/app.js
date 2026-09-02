@@ -219,8 +219,15 @@ function initHeroNetwork(){
       y:28,
       duration:0.9,
       ease:"power3.out",
-      clearProps:"transform"
+      clearProps:"opacity,transform"
     },vars||{}));
+  }
+
+  function resetShowcasePanel(panel){
+    if(!panel||reduce||typeof gsap==="undefined")return;
+    var animated=panel.querySelectorAll(".showcase-copy,.showcase-orbit,.hotspot");
+    gsap.killTweensOf(animated);
+    gsap.set(animated,{clearProps:"opacity,transform"});
   }
 
   function animateHero(){
@@ -285,12 +292,12 @@ function initHeroNetwork(){
       },
       products:function(){
         entrance(view.querySelector(".showcase-tabs"),{y:16,duration:0.7});
+        resetShowcasePanel(view.querySelector(".showcase-panel.active"));
         entrance(view.querySelector(".showcase-panel.active .showcase-copy"),{x:-20,y:0,duration:0.85,delay:0.08});
         entrance(view.querySelector(".showcase-panel.active .showcase-visual"),{scale:0.97,duration:1,delay:0.14,ease:"power3.out"});
         entrance(view.querySelector(".catalog-callout"),{y:22,delay:0.52,duration:0.8});
       },
       brands:function(){
-        entrance(view.querySelector(".brands-intro"),{y:20,duration:0.8});
         entrance(view.querySelector(".brand-proof"),{y:18,duration:0.8,delay:0.08});
         entrance(view.querySelector(".brand-network"),{y:0,duration:1,delay:0.18});
         entrance(view.querySelector(".brand-footnote"),{delay:0.32,duration:0.8});
@@ -332,13 +339,12 @@ function initHeroNetwork(){
       items.forEach(function(item){item.classList.add("revealed");});
       return;
     }
-    gsap.set(items,{opacity:0,y:26});
     ScrollTrigger.batch(items,{
       start:"top 88%",
       once:true,
       onEnter:function(batch){
         batch.forEach(function(el){el.classList.add("revealed");});
-        gsap.to(batch,{
+        gsap.fromTo(batch,{opacity:0,y:26},{
           opacity:1,
           y:0,
           duration:0.9,
@@ -568,6 +574,7 @@ function initHeroNetwork(){
           panel.classList.remove("is-switching");
         });
         clearFocus(nextPanel);
+        resetShowcasePanel(nextPanel);
         requestAnimationFrame(function(){
           drawConnectors(nextPanel);
           if(!reduce){
@@ -575,13 +582,15 @@ function initHeroNetwork(){
               opacity:0,
               x:-18,
               duration:0.65,
-              ease:"power3.out"
+              ease:"power3.out",
+              clearProps:"opacity,transform"
             });
             gsap.from(nextPanel.querySelector(".showcase-orbit"),{
               opacity:0,
               scale:0.94,
               duration:0.8,
-              ease:"power3.out"
+              ease:"power3.out",
+              clearProps:"opacity,transform"
             });
             gsap.from(nextPanel.querySelectorAll(".hotspot"),{
               opacity:0,
@@ -589,31 +598,15 @@ function initHeroNetwork(){
               duration:0.55,
               stagger:0.06,
               delay:0.18,
-              ease:"power3.out"
+              ease:"power3.out",
+              clearProps:"opacity,transform"
             });
           }
           switching=false;
         });
       }
 
-      if(prevPanel&&prevPanel!==nextPanel&&!reduce){
-        prevPanel.classList.add("is-switching");
-        var out=gsap.timeline({onComplete:showNext});
-        out.to(prevPanel.querySelector(".showcase-copy"),{
-          opacity:0,
-          x:-12,
-          duration:0.28,
-          ease:"power2.in"
-        },0);
-        out.to(prevPanel.querySelector(".showcase-orbit"),{
-          opacity:0,
-          scale:0.96,
-          duration:0.28,
-          ease:"power2.in"
-        },0);
-      }else{
-        showNext();
-      }
+      showNext();
     }
 
     root.addEventListener("click",function(event){
