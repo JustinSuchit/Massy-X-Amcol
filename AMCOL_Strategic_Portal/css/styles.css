@@ -294,3 +294,6 @@ main{padding:0 28px;min-height:calc(100vh - 147px)}.view{display:none;padding:52
 .section-intro p,
 .split-intro p{color:var(--muted);opacity:1;visibility:visible}
 .view.active .reveal{opacity:1;visibility:visible}
+
+/* Keep the operational-risk cards on the same rail without visually merging them into the photo panel above. */
+#v-why-now .photo-band + .pressure-grid{margin-top:16px}
